@@ -57,6 +57,7 @@ function LoadComponent_Bootstrap() {
 function LoadComponent_Datepicker() {
     let Head_obj = document.getElementsByTagName('head')[0];
     let Script_obj = document.createElement('script');
+    let Script2_obj = document.createElement('script');
     let Link_obj = document.createElement('link');
 
     Link_obj.setAttribute('rel', 'stylesheet');
@@ -67,8 +68,7 @@ function LoadComponent_Datepicker() {
     Script_obj.setAttribute('src', 'https://h5665773.github.io/bootstrap-datepicker-1.9.0-dist/js/bootstrap-datepicker.min.js');
     Head_obj.appendChild(Script_obj);
 
-    Script_obj = document.createElement('script');
-    Script_obj.setAttribute('type', 'text/javascript');
-    Script_obj.setAttribute('src', 'https://h5665773.github.io/bootstrap-datepicker-1.9.0-dist/locales/bootstrap-datepicker.zh-TW.min.js');
-    Head_obj.appendChild(Script_obj);
+    Script2_obj.setAttribute('type', 'text/javascript');
+    Script2_obj.setAttribute('src', 'https://h5665773.github.io/bootstrap-datepicker-1.9.0-dist/locales/bootstrap-datepicker.zh-TW.min.js');
+    Head_obj.appendChild(Script_obj2);
 }
