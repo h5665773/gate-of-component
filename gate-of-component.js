@@ -58,6 +58,7 @@ function LoadComponent_Bootstrap() {
         Script_obj.setAttribute('type', 'text/javascript');
         Script_obj.setAttribute('src', 'https://h5665773.github.io/bootstrap-4.5.0-dist/js/bootstrap.min.js');
         Head_obj.appendChild(Script_obj);
+        resolve('done');
     });
 }
 
@@ -79,6 +80,7 @@ function LoadComponent_Datepicker() {
         Script2_obj.setAttribute('type', 'text/javascript');
         Script2_obj.setAttribute('src', 'https://h5665773.github.io/bootstrap-datepicker-1.9.0-dist/locales/bootstrap-datepicker.zh-TW.min.js');
         Head_obj.appendChild(Script2_obj);
+        resolve('done');
     });
 }
 
@@ -100,6 +102,7 @@ function LoadComponent_Bootstrapselect() {
         Script2_obj.setAttribute('type', 'text/javascript');
         Script2_obj.setAttribute('src', 'https://h5665773.github.io/bootstrap-select-1.13.14-dist/js/i18n/defaults-zh_TW.min.js');
         Head_obj.appendChild(Script2_obj);
+        resolve('done');
     });
 }
 
@@ -111,5 +114,6 @@ function LoadComponent_Vue() {
         Script_obj.setAttribute('type', 'text/javascript');
         Script_obj.setAttribute('src', 'https://h5665773.github.io/Vue-2.6.11-dist/vue.min.js');
         Head_obj.appendChild(Script_obj);
+        resolve('done');
     });
 }
