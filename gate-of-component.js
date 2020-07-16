@@ -70,5 +70,5 @@ function LoadComponent_Datepicker() {
 
     Script2_obj.setAttribute('type', 'text/javascript');
     Script2_obj.setAttribute('src', 'https://h5665773.github.io/bootstrap-datepicker-1.9.0-dist/locales/bootstrap-datepicker.zh-TW.min.js');
-    Head_obj.appendChild(Script_obj2);
+    Head_obj.appendChild(Script2_obj);
 }
