@@ -4,34 +4,6 @@
 })();
 var $goc = jQuery.noConflict(true);
 
-var Vue_obj = new Vue({
-    el: '#Vue',
-    data: {
-        ComList: {},
-        CuList_Source: {},
-        CuList: {},
-        DaysByMonth: {}
-    },
-    updated() {
-        this.$nextTick(function () {
-            $goc('.selectpicker').selectpicker('refresh');
-        });
-    },
-    methods: {
-        Cu_Filter: function () {
-            let F_COM_ID_str = $goc('#F_COM_ID').val();
-            Vue_obj.CuList = Vue_obj.CuList_Source.filter(data => { return data.F_COM_ID.match(F_COM_ID_str) });
-        },
-        QuerySchedule: function () {
-            ClearMessage($goc('#AlertScript'));
-            if (Query_InputCheck() == false) {
-                return;
-            }
-            SetLastDayOfMonth();
-        }
-    }
-});
-
 function AlertMessage(Type_str, Massage_str, Target_obj) {
     //Type = primary / secondary / success / danger / warning / info / light / dark
 
