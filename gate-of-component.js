@@ -23,6 +23,7 @@ function ClearMessage(Target_obj) {
 function SetDatepicker(Type_str, Target_obj) {
     //Type = yyyy-mm / yyyy-mm-dd
 
+    console.log(Target_obj);
     Target_obj.datepicker({
         format: Type_str,
         startView: 1,
