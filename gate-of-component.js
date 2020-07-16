@@ -57,37 +57,26 @@ function LoadComponent_Bootstrap() {
 }
 
 function LoadComponent_Datepicker() {
-    Datepicker_Part(1).then(Datepicker_Part(2)).then(Datepicker_Part(3));
-}
-function Datepicker_Part(Part_no) {
-    return new Promise(function (resolve, reject) {
-        let Head_obj = document.getElementsByTagName('head')[0];
-        let Script_obj = document.createElement('script');
-        let Script2_obj = document.createElement('script');
-        let Link_obj = document.createElement('link');
+    let Head_obj = document.getElementsByTagName('head')[0];
+    let Script_obj = document.createElement('script');
+    let Script2_obj = document.createElement('script');
+    let Link_obj = document.createElement('link');
 
-        switch (Part_no) {
-            case 1:
-                Link_obj.setAttribute('rel', 'stylesheet');
-                Link_obj.setAttribute('href', 'https://h5665773.github.io/bootstrap-datepicker-1.9.0-dist/css/bootstrap-datepicker.min.css');
-                Head_obj.appendChild(Link_obj);
-                console.log(Part_no+',' + Link_obj.readyState);
-                break;
-            case 2:
-                Script_obj.setAttribute('type', 'text/javascript');
-                Script_obj.setAttribute('src', 'https://h5665773.github.io/bootstrap-datepicker-1.9.0-dist/js/bootstrap-datepicker.min.js');
-                Head_obj.appendChild(Script_obj);
-                console.log(Part_no + ',' + Script_obj.readyState);
-                break;
-            case 3:
-                Script2_obj.setAttribute('type', 'text/javascript');
-                Script2_obj.setAttribute('src', 'https://h5665773.github.io/bootstrap-datepicker-1.9.0-dist/locales/bootstrap-datepicker.zh-TW.min.js');
-                Head_obj.appendChild(Script2_obj);
-                console.log(Part_no + ',' + Script2_obj.readyState);
-                break;
-        }
-        resolve('Load Complete');
-    });
+    Link_obj.setAttribute('rel', 'stylesheet');
+    Link_obj.setAttribute('href', 'https://h5665773.github.io/bootstrap-datepicker-1.9.0-dist/css/bootstrap-datepicker.min.css');
+    Head_obj.appendChild(Link_obj);
+
+    Link_obj.onload = function () {
+        Script_obj.setAttribute('type', 'text/javascript');
+        Script_obj.setAttribute('src', 'https://h5665773.github.io/bootstrap-datepicker-1.9.0-dist/js/bootstrap-datepicker.min.js');
+        Head_obj.appendChild(Script_obj);
+    }
+
+    Script_obj.onload = function () {
+        Script2_obj.setAttribute('type', 'text/javascript');
+        Script2_obj.setAttribute('src', 'https://h5665773.github.io/bootstrap-datepicker-1.9.0-dist/locales/bootstrap-datepicker.zh-TW.min.js');
+        Head_obj.appendChild(Script2_obj);
+    }
 }
 
 function LoadComponent_Bootstrapselect() {
