@@ -5,7 +5,7 @@
 var $goc = jQuery.noConflict(true);
 
 function AlertMessage(Type_str, Massage_str, Target_obj) {
-    //Type - primary/secondary/success/danger/warning/info/light/dark
+    //Type = primary / secondary / success / danger / warning / info / light / dark
 
     let AlertMessage_obj =
         `<div class='alert alert-${Type_str}' role='alert'>` +
@@ -16,8 +16,23 @@ function AlertMessage(Type_str, Massage_str, Target_obj) {
     Target_obj.html(AlertMessage_obj);
 }
 
-function ClearMessage() {
-    $goc('#AlertScript').html('');
+function ClearMessage(Target_obj) {
+    Target_obj.html('');
+}
+
+function SetDatepicker(Type_str, Target_obj) {
+    //Type = yyyy-mm / yyyy-mm-dd
+
+    Target_obj.datepicker({
+        format: Type_str,
+        startView: 1,
+        minViewMode: 1,
+        clearBtn: true,
+        language: "zh-TW",
+        orientation: "bottom left",
+        autoclose: true,
+        todayHighlight: true
+    });
 }
 
 function LoadComponent_All() {
