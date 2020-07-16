@@ -4,8 +4,6 @@
   var $ = jQuery.noConflict(true);
 })();
 
-document.write("test");
-
 function AlertMessage(Type_str, Massage_str, Target_obj) {
     //Type - primary/secondary/success/danger/warning/info/light/dark
 
@@ -17,3 +15,16 @@ function AlertMessage(Type_str, Massage_str, Target_obj) {
 
     Target_obj.html(AlertMessage_obj);
 }
+
+function ClearMessage() {
+    $('#AlertScript').html('');
+}
+
+function LoadComponent_All() {
+    LoadComponent_Bootstrap();
+}
+
+function LoadComponent_Bootstrap() {
+
+}
+
