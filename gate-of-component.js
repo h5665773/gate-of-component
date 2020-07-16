@@ -36,69 +36,80 @@ function SetDatepicker(Type_str, Target_obj) {
 }
 
 function LoadComponent_All() {
-    LoadComponent_Bootstrap();
-    LoadComponent_Datepicker();
-    LoadComponent_Bootstrapselect();
-    LoadComponent_Vue();
+    LoadComponent_Bootstrap().then(
+        LoadComponent_Datepicker()
+    ).then(
+        LoadComponent_Bootstrapselect()
+    ).then(
+        LoadComponent_Vue()
+    );
 }
 
 function LoadComponent_Bootstrap() {
-    let Head_obj = document.getElementsByTagName('head')[0];
-    let Script_obj = document.createElement('script');
-    let Link_obj = document.createElement('link');
+    return new Promise(function (resolve, reject) {
+        let Head_obj = document.getElementsByTagName('head')[0];
+        let Script_obj = document.createElement('script');
+        let Link_obj = document.createElement('link');
 
-    Link_obj.setAttribute('rel', 'stylesheet');
-    Link_obj.setAttribute('href', 'https://h5665773.github.io/bootstrap-4.5.0-dist/css/bootstrap.min.css');
-    Head_obj.appendChild(Link_obj);
+        Link_obj.setAttribute('rel', 'stylesheet');
+        Link_obj.setAttribute('href', 'https://h5665773.github.io/bootstrap-4.5.0-dist/css/bootstrap.min.css');
+        Head_obj.appendChild(Link_obj);
 
-    Script_obj.setAttribute('type', 'text/javascript');
-    Script_obj.setAttribute('src', 'https://h5665773.github.io/bootstrap-4.5.0-dist/js/bootstrap.min.js');
-    Head_obj.appendChild(Script_obj);
+        Script_obj.setAttribute('type', 'text/javascript');
+        Script_obj.setAttribute('src', 'https://h5665773.github.io/bootstrap-4.5.0-dist/js/bootstrap.min.js');
+        Head_obj.appendChild(Script_obj);
+    });
 }
 
 function LoadComponent_Datepicker() {
-    let Head_obj = document.getElementsByTagName('head')[0];
-    let Script_obj = document.createElement('script');
-    let Script2_obj = document.createElement('script');
-    let Link_obj = document.createElement('link');
+    return new Promise(function (resolve, reject) {
+        let Head_obj = document.getElementsByTagName('head')[0];
+        let Script_obj = document.createElement('script');
+        let Script2_obj = document.createElement('script');
+        let Link_obj = document.createElement('link');
 
-    Link_obj.setAttribute('rel', 'stylesheet');
-    Link_obj.setAttribute('href', 'https://h5665773.github.io/bootstrap-datepicker-1.9.0-dist/css/bootstrap-datepicker.min.css');
-    Head_obj.appendChild(Link_obj);
+        Link_obj.setAttribute('rel', 'stylesheet');
+        Link_obj.setAttribute('href', 'https://h5665773.github.io/bootstrap-datepicker-1.9.0-dist/css/bootstrap-datepicker.min.css');
+        Head_obj.appendChild(Link_obj);
 
-    Script_obj.setAttribute('type', 'text/javascript');
-    Script_obj.setAttribute('src', 'https://h5665773.github.io/bootstrap-datepicker-1.9.0-dist/js/bootstrap-datepicker.min.js');
-    Head_obj.appendChild(Script_obj);
+        Script_obj.setAttribute('type', 'text/javascript');
+        Script_obj.setAttribute('src', 'https://h5665773.github.io/bootstrap-datepicker-1.9.0-dist/js/bootstrap-datepicker.min.js');
+        Head_obj.appendChild(Script_obj);
 
-    Script2_obj.setAttribute('type', 'text/javascript');
-    Script2_obj.setAttribute('src', 'https://h5665773.github.io/bootstrap-datepicker-1.9.0-dist/locales/bootstrap-datepicker.zh-TW.min.js');
-    Head_obj.appendChild(Script2_obj);
+        Script2_obj.setAttribute('type', 'text/javascript');
+        Script2_obj.setAttribute('src', 'https://h5665773.github.io/bootstrap-datepicker-1.9.0-dist/locales/bootstrap-datepicker.zh-TW.min.js');
+        Head_obj.appendChild(Script2_obj);
+    });
 }
 
 function LoadComponent_Bootstrapselect() {
-    let Head_obj = document.getElementsByTagName('head')[0];
-    let Script_obj = document.createElement('script');
-    let Script2_obj = document.createElement('script');
-    let Link_obj = document.createElement('link');
+    return new Promise(function (resolve, reject) {
+        let Head_obj = document.getElementsByTagName('head')[0];
+        let Script_obj = document.createElement('script');
+        let Script2_obj = document.createElement('script');
+        let Link_obj = document.createElement('link');
 
-    Link_obj.setAttribute('rel', 'stylesheet');
-    Link_obj.setAttribute('href', 'https://h5665773.github.io/bootstrap-select-1.13.14-dist/css/bootstrap-select.min.css');
-    Head_obj.appendChild(Link_obj);
+        Link_obj.setAttribute('rel', 'stylesheet');
+        Link_obj.setAttribute('href', 'https://h5665773.github.io/bootstrap-select-1.13.14-dist/css/bootstrap-select.min.css');
+        Head_obj.appendChild(Link_obj);
 
-    Script_obj.setAttribute('type', 'text/javascript');
-    Script_obj.setAttribute('src', 'https://h5665773.github.io/bootstrap-select-1.13.14-dist/js/bootstrap-select.min.js');
-    Head_obj.appendChild(Script_obj);
+        Script_obj.setAttribute('type', 'text/javascript');
+        Script_obj.setAttribute('src', 'https://h5665773.github.io/bootstrap-select-1.13.14-dist/js/bootstrap-select.min.js');
+        Head_obj.appendChild(Script_obj);
 
-    Script2_obj.setAttribute('type', 'text/javascript');
-    Script2_obj.setAttribute('src', 'https://h5665773.github.io/bootstrap-select-1.13.14-dist/js/i18n/defaults-zh_TW.min.js');
-    Head_obj.appendChild(Script2_obj);
+        Script2_obj.setAttribute('type', 'text/javascript');
+        Script2_obj.setAttribute('src', 'https://h5665773.github.io/bootstrap-select-1.13.14-dist/js/i18n/defaults-zh_TW.min.js');
+        Head_obj.appendChild(Script2_obj);
+    });
 }
 
 function LoadComponent_Vue() {
-    let Head_obj = document.getElementsByTagName('head')[0];
-    let Script_obj = document.createElement('script');
+    return new Promise(function (resolve, reject) {
+        let Head_obj = document.getElementsByTagName('head')[0];
+        let Script_obj = document.createElement('script');
 
-    Script_obj.setAttribute('type', 'text/javascript');
-    Script_obj.setAttribute('src', 'https://h5665773.github.io/Vue-2.6.11-dist/vue.min.js');
-    Head_obj.appendChild(Script_obj);
+        Script_obj.setAttribute('type', 'text/javascript');
+        Script_obj.setAttribute('src', 'https://h5665773.github.io/Vue-2.6.11-dist/vue.min.js');
+        Head_obj.appendChild(Script_obj);
+    });
 }
