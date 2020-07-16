@@ -25,6 +25,17 @@ function LoadComponent_All() {
 }
 
 function LoadComponent_Bootstrap() {
+    let Head_obj = document.getElementsByTagName('head')[0];
+    let Script_obj = document.createElement('script');
+    let Link_obj = document.createElement('link');
+    
+    Script_obj.setAttribute('type', 'text/javascript');
+    Script_obj.setAttribute('src', 'https://h5665773.github.io/bootstrap-4.5.0-dist/js/bootstrap.min.js');
 
+    Link_obj.setAttribute('rel', 'stylesheet');
+    Link_obj.setAttribute('href', 'https://h5665773.github.io/bootstrap-4.5.0-dist/css/bootstrap.min.css');
+    
+    Head_obj.appendChild(Link_obj);
+    Head_obj.appendChild(Script_obj);
 }
 
