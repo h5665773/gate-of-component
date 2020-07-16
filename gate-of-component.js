@@ -39,6 +39,7 @@ function LoadComponent_All() {
     LoadComponent_Bootstrap();
     LoadComponent_Datepicker();
     LoadComponent_Bootstrapselect();
+    LoadComponent_Vue();
 }
 
 function LoadComponent_Bootstrap() {
@@ -91,4 +92,13 @@ function LoadComponent_Bootstrapselect() {
     Script2_obj.setAttribute('type', 'text/javascript');
     Script2_obj.setAttribute('src', 'https://h5665773.github.io/bootstrap-select-1.13.14-dist/js/i18n/defaults-zh_TW.min.js');
     Head_obj.appendChild(Script2_obj);
+}
+
+function LoadComponent_Vue() {
+    let Head_obj = document.getElementsByTagName('head')[0];
+    let Script_obj = document.createElement('script');
+
+    Script_obj.setAttribute('type', 'text/javascript');
+    Script_obj.setAttribute('src', 'https://h5665773.github.io/Vue-2.6.11-dist/vue.min.js');
+    Head_obj.appendChild(Script_obj);
 }
