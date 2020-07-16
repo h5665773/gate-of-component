@@ -23,7 +23,6 @@ function ClearMessage(Target_obj) {
 function SetDatepicker(Type_str, Target_obj) {
     //Type = yyyy-mm / yyyy-mm-dd
 
-    console.log(Target_obj);
     Target_obj.datepicker({
         format: Type_str,
         startView: 1,
@@ -39,6 +38,7 @@ function SetDatepicker(Type_str, Target_obj) {
 function LoadComponent_All() {
     LoadComponent_Bootstrap();
     LoadComponent_Datepicker();
+    LoadComponent_Bootstrapselect();
 }
 
 function LoadComponent_Bootstrap() {
@@ -71,5 +71,24 @@ function LoadComponent_Datepicker() {
 
     Script2_obj.setAttribute('type', 'text/javascript');
     Script2_obj.setAttribute('src', 'https://h5665773.github.io/bootstrap-datepicker-1.9.0-dist/locales/bootstrap-datepicker.zh-TW.min.js');
+    Head_obj.appendChild(Script2_obj);
+}
+
+function LoadComponent_Bootstrapselect() {
+    let Head_obj = document.getElementsByTagName('head')[0];
+    let Script_obj = document.createElement('script');
+    let Script2_obj = document.createElement('script');
+    let Link_obj = document.createElement('link');
+
+    Link_obj.setAttribute('rel', 'stylesheet');
+    Link_obj.setAttribute('href', 'https://h5665773.github.io/bootstrap-select-1.13.14-dist/css/bootstrap-select.min.css');
+    Head_obj.appendChild(Link_obj);
+
+    Script_obj.setAttribute('type', 'text/javascript');
+    Script_obj.setAttribute('src', 'https://h5665773.github.io/bootstrap-select-1.13.14-dist/js/bootstrap-select.min.js');
+    Head_obj.appendChild(Script_obj);
+
+    Script2_obj.setAttribute('type', 'text/javascript');
+    Script2_obj.setAttribute('src', 'https://h5665773.github.io/bootstrap-select-1.13.14-dist/js/i18n/defaults-zh_TW.min.js');
     Head_obj.appendChild(Script2_obj);
 }
