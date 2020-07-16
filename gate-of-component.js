@@ -71,19 +71,22 @@ function Datepicker_Part(Part_no) {
                 Link_obj.setAttribute('rel', 'stylesheet');
                 Link_obj.setAttribute('href', 'https://h5665773.github.io/bootstrap-datepicker-1.9.0-dist/css/bootstrap-datepicker.min.css');
                 Head_obj.appendChild(Link_obj);
+                console.log(Part_no+',' + Link_obj.readyState);
                 break;
             case 2:
                 Script_obj.setAttribute('type', 'text/javascript');
                 Script_obj.setAttribute('src', 'https://h5665773.github.io/bootstrap-datepicker-1.9.0-dist/js/bootstrap-datepicker.min.js');
                 Head_obj.appendChild(Script_obj);
+                console.log(Part_no + ',' + Script_obj.readyState);
                 break;
             case 3:
                 Script2_obj.setAttribute('type', 'text/javascript');
                 Script2_obj.setAttribute('src', 'https://h5665773.github.io/bootstrap-datepicker-1.9.0-dist/locales/bootstrap-datepicker.zh-TW.min.js');
                 Head_obj.appendChild(Script2_obj);
+                console.log(Part_no + ',' + Script2_obj.readyState);
                 break;
         }
-        resolve('Loaded Complete');
+        resolve('Load Complete');
     });
 }
 
