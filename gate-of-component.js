@@ -80,22 +80,26 @@ function LoadComponent_Datepicker() {
 }
 
 function LoadComponent_Bootstrapselect() {
-        let Head_obj = document.getElementsByTagName('head')[0];
-        let Script_obj = document.createElement('script');
-        let Script2_obj = document.createElement('script');
-        let Link_obj = document.createElement('link');
+    let Head_obj = document.getElementsByTagName('head')[0];
+    let Script_obj = document.createElement('script');
+    let Script2_obj = document.createElement('script');
+    let Link_obj = document.createElement('link');
 
-        Link_obj.setAttribute('rel', 'stylesheet');
-        Link_obj.setAttribute('href', 'https://h5665773.github.io/bootstrap-select-1.13.14-dist/css/bootstrap-select.min.css');
-        Head_obj.appendChild(Link_obj);
+    Link_obj.setAttribute('rel', 'stylesheet');
+    Link_obj.setAttribute('href', 'https://h5665773.github.io/bootstrap-select-1.13.14-dist/css/bootstrap-select.min.css');
+    Head_obj.appendChild(Link_obj);
 
+    Link_obj.onload = function () {
         Script_obj.setAttribute('type', 'text/javascript');
         Script_obj.setAttribute('src', 'https://h5665773.github.io/bootstrap-select-1.13.14-dist/js/bootstrap-select.min.js');
         Head_obj.appendChild(Script_obj);
+    }
 
+    Script_obj.onload = function () {
         Script2_obj.setAttribute('type', 'text/javascript');
         Script2_obj.setAttribute('src', 'https://h5665773.github.io/bootstrap-select-1.13.14-dist/js/i18n/defaults-zh_TW.min.js');
         Head_obj.appendChild(Script2_obj);
+    }
 }
 
 function LoadComponent_Vue() {
