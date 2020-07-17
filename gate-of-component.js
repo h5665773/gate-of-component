@@ -15,6 +15,8 @@ var isLoadComponent_Bootstrapselect = true;
 var isLoadComponent_Vue = true;
 var isLoadExternal_js = true;
 var External_js_Path = '';
+var Datepicker_obj;
+var Selectpicker_obj;
 
 var Head_obj = document.getElementsByTagName('head')[0];
 var Component_Jquery_js = document.createElement('script');
@@ -179,9 +181,9 @@ function SetVue_obj() {
             DaysByMonth: {}
         },
         updated() {
-            //this.$nextTick(function () {
-            //    $goc('.selectpicker').selectpicker('refresh');
-            //});
+            this.$nextTick(function () {
+                Selectpicker_obj.selectpicker('refresh');
+            });
         },
         methods: {
             //Cu_Filter: function () {
