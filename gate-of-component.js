@@ -66,15 +66,20 @@ var Vue_obj;
 
 function LoadComponent_All() {
     return new Promise((resolve, reject) => {
-        LoadComponent_Jquery().then(
-            LoadComponent_Bootstrap()
-        ).then(
-            LoadComponent_Datepicker()
-        ).then(
-            LoadComponent_Bootstrapselect()
-        ).then(
-            LoadComponent_Vue()
-        ).then(
+        LoadComponent_Jquery()
+            .then(
+                LoadComponent_Bootstrap()
+            )
+            .then(
+                LoadComponent_Datepicker()
+            )
+            .then(
+                LoadComponent_Bootstrapselect()
+            )
+            .then(
+                LoadComponent_Vue()
+            )
+            .then(
             function () {
                 console.log('Component_All Load Completed.');
                 resolve('Component_All Load Completed.');
