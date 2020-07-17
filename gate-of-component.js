@@ -75,6 +75,7 @@ var isLoadComponent_Vue = false;
 
 
 function LoadComponent() {
+    return new Promise((resolve, reject) => { 
     if (Component_Jquery_Enable == false && isLoadComponent_Jquery == true) {
         LoadComponent_Jquery();
         Component_Jquery_js.onload = function () {
@@ -117,8 +118,9 @@ function LoadComponent() {
         }
     }
     else {
-        return true;
-    }
+        resolve('Component_All Load Completed.');
+        }
+    });
 }
 
 function LoadComponent_Jquery() {
