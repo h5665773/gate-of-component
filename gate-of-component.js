@@ -74,9 +74,12 @@ function LoadComponent_All() {
             LoadComponent_Bootstrapselect()
         ).then(
             LoadComponent_Vue()
+        ).then(
+            function () {
+                console.log('Component_All Load Completed.');
+                resolve('Component_All Load Completed.');
+            }
         );
-        console.log('Component_All Load Completed.');
-        resolve('Component_All Load Completed.');
     });
 }
 
