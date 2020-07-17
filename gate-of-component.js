@@ -49,7 +49,6 @@ Component_Vue_js.setAttribute('type', 'text/javascript');
 Component_Vue_js.setAttribute('src', 'https://h5665773.github.io/Vue-2.6.11-dist/vue.min.js');
 var External_js = document.createElement('script');
 External_js.setAttribute('type', 'text/javascript');
-External_js.setAttribute('src', `${External_js_Path}.js?Update=${Today_str}`);
 
 //Vue_obj = new Vue({
 //    el: '#Vue',
@@ -171,6 +170,7 @@ function LoadComponent_Vue() {
 }
 
 function LoadExternal_js() {
+    External_js.setAttribute('src', `${External_js_Path}.js?Update=${Today_str}`);
     Head_obj.appendChild(External_js);
 }
 
