@@ -174,6 +174,9 @@ function AlertMessage(Type_str, Massage_str) {
     if (MessageArea_obj != undefined) {
         MessageArea_obj.html(AlertMessage_obj);
     }
+    else {
+        alert(Massage_str);
+    }
 }
 
 function ClearMessage() {
