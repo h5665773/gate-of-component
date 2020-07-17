@@ -51,10 +51,18 @@ var isLoadComponent_Bootstrapselect = true;
 var isLoadComponent_Vue = true;
 var isLoadExternal_js = true;
 var External_js_Path = '';
-var Datepicker_obj;
+var MessageArea_obj;
 var Selectpicker_obj;
+var Datepicker_obj;
+var AjaxUrl_str = 'XMLFORM/AjaxOrder.aspx';
 
-function LoadComponent() {
+
+//ex:
+//External_js_Path = 'scriptself/PA1601';
+//MessageArea_obj = $j('#AlertScript');
+//LoadComponents();
+
+function LoadComponents() {
     if (Component_Jquery_Enable == false && isLoadComponent_Jquery == true) {
         LoadComponent_Jquery();
         Component_Jquery_js.onload = function () {
@@ -149,7 +157,7 @@ function LoadExternal_js() {
     Head_obj.appendChild(External_js);
 }
 
-function AlertMessage(Type_str, Massage_str, Target_obj) {
+function AlertMessage(Type_str, Massage_str) {
     //Type = primary / secondary / success / danger / warning / info / light / dark
 
     let AlertMessage_obj =
@@ -158,7 +166,9 @@ function AlertMessage(Type_str, Massage_str, Target_obj) {
         `<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>` +
         `</div>`;
 
-    Target_obj.html(AlertMessage_obj);
+    if (MessageArea_obj != undefined) {
+        MessageArea_obj.html(AlertMessage_obj);
+    }
 }
 
 function ClearMessage() {
@@ -190,14 +200,12 @@ function SetVue_obj() {
             });
         },
         methods: {
-            Cu_Filter: function (test) {
-                console.log(test);
-                //let F_COM_ID_str = $goc('#F_COM_ID').val();
-                //Vue_obj.CuList = Vue_obj.CuList_Source.filter(data => { return data.F_COM_ID.match(F_COM_ID_str) });
+            Cu_Filter: function (F_COM_ID_str) {
+                Vue_obj.CuList = Vue_obj.CuList_Source.filter(data => { return data.F_COM_ID.match(F_COM_ID_str); });
             },
             QuerySchedule: function () {
                 ClearMessage();
-                if (Query_InputCheck() == false) {
+                if (QuerySchedule_InputCheck() == false) {
                     return;
                 }
                 SetLastDayOfMonth();
@@ -226,7 +234,7 @@ function SetDatepicker(Type_str, Target_obj) {
 function SetComData() {
     $goc.ajax({
         type: 'POST',
-        url: 'XMLFORM/AjaxOrder.aspx',
+        url: AjaxUrl_str,
         data: {
             Order: 'Get_ComData'
         },
@@ -240,7 +248,7 @@ function SetComData() {
 function SetCuData(F_COM_ID_str) {
     $goc.ajax({
         type: 'POST',
-        url: 'XMLFORM/AjaxOrder.aspx',
+        url: AjaxUrl_str,
         data: {
             Order: 'Get_CuData',
             F_COM_ID: F_COM_ID_str
@@ -251,4 +259,51 @@ function SetCuData(F_COM_ID_str) {
             Vue_obj.CuList = Vue_obj.CuList_Source;
         }
     });
+}
+
+function QuerySchedule_InputCheck() {
+    let F_YM_str = $goc('#F_YM').val();
+    let F_CU_ID_str = $goc('#F_CU_ID').val();
+    let F_COM_ID_str = $goc('#F_COM_ID').val();
+
+    if (F_YM_str == '' || F_CU_ID_str == '' || F_COM_ID_str == '') {
+        AlertMessage('warning', '請輸入查詢條件！');
+        return false;
+    }
+    else {
+        return true;
+    }
+}
+
+function SetLastDayOfMonth() {
+    let LastDayOfMonth_date = new Date($goc('#F_YM').val());
+    let SetLastDayOfMonth_int = 0;
+    let DayList = ['日', '一', '二', '三', '四', '五', '六'];
+    let DaysByMonth_str = "[";
+
+    LastDayOfMonth_date.setMonth(LastDayOfMonth_date.getMonth() + 1);
+    LastDayOfMonth_date.setDate(1);
+    LastDayOfMonth_date.setDate(LastDayOfMonth_date.getDate() - 1);
+    SetLastDayOfMonth_int = parseInt(LastDayOfMonth_date.getDate());
+    LastDayOfMonth_date.setDate(1);
+
+    for (let i = 0; i < SetLastDayOfMonth_int; i++) {
+        let Day = DayList[LastDayOfMonth_date.getDay()];
+        let idx = (i + 1);
+        if (idx.toString().length == 1) {
+            idx = '0' + idx;
+        }
+
+        DaysByMonth_str += `{"DayNo":"${idx}","Day":"${Day}"}`;
+
+        if (i != SetLastDayOfMonth_int - 1) {
+            DaysByMonth_str += ",";
+        }
+
+        LastDayOfMonth_date.setDate(LastDayOfMonth_date.getDate() + 1);
+    }
+
+    DaysByMonth_str += "]"
+
+    Vue_obj.DaysByMonth = JSON.parse(DaysByMonth_str);
 }
