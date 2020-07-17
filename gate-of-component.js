@@ -68,22 +68,35 @@ function LoadComponent_All() {
     return new Promise((resolve, reject) => {
         LoadComponent_Jquery()
             .then(
-                LoadComponent_Bootstrap()
+                success => {
+                    console.log(success);
+                    LoadComponent_Bootstrap();
+                }
             )
             .then(
-                LoadComponent_Datepicker()
+                success => {
+                    console.log(success);
+                    LoadComponent_Datepicker();
+                }
             )
             .then(
-                LoadComponent_Bootstrapselect()
+                success => {
+                    console.log(success);
+                    LoadComponent_Bootstrapselect();
+                }
             )
             .then(
-                LoadComponent_Vue()
+                success => {
+                    console.log(success);
+                    LoadComponent_Vue();
+                }
             )
             .then(
-            function () {
-                console.log('Component_All Load Completed.');
-                resolve('Component_All Load Completed.');
-            }
+                success => {
+                    console.log(success);
+                    console.log('Component_All Load Completed.');
+                    resolve('Component_All Load Completed.');
+                }
         );
     });
 }
