@@ -1,5 +1,6 @@
 var $goc;
 var Vue_obj;
+var Today_str = (new Date).getFullYear().toString() + (new Date).getMonth().toString() + (new Date).getDate().toString();
 var Component_Jquery_Enable = false;
 var Component_Bootstrap_Enable = false;
 var Component_Datepicker_Enable = false;
@@ -47,7 +48,7 @@ Component_Vue_js.setAttribute('type', 'text/javascript');
 Component_Vue_js.setAttribute('src', 'https://h5665773.github.io/Vue-2.6.11-dist/vue.min.js');
 var External_js = document.createElement('script');
 External_js.setAttribute('type', 'text/javascript');
-External_js.setAttribute('src', `${External_js_Path}.js`);
+External_js.setAttribute('src', `${External_js_Path}.js?Update=${Today_str}`);
 
 
 LoadComponent();
