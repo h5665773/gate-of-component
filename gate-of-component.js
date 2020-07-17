@@ -51,9 +51,6 @@ var External_js = document.createElement('script');
 External_js.setAttribute('type', 'text/javascript');
 External_js.setAttribute('src', `${External_js_Path}.js?Update=${Today_str}`);
 
-
-LoadComponent();
-
 //Vue_obj = new Vue({
 //    el: '#Vue',
 //    data: {
