@@ -69,6 +69,7 @@ Component_Vue_js.onload = function () {
 LoadComponent_All();
 
 function LoadComponent_All() {
+    LoadComponent_Jquery();
     Component_Jquery_js.onload = function () {
         $goc = jQuery.noConflict(true);
         console.log('Component_Jquery Load Completed.');
