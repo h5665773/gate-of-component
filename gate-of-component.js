@@ -190,17 +190,18 @@ function SetVue_obj() {
             });
         },
         methods: {
-            //Cu_Filter: function () {
-            //    let F_COM_ID_str = $goc('#F_COM_ID').val();
-            //    Vue_obj.CuList = Vue_obj.CuList_Source.filter(data => { return data.F_COM_ID.match(F_COM_ID_str) });
-            //},
-            //QuerySchedule: function () {
-            //    ClearMessage();
-            //    if (Query_InputCheck() == false) {
-            //        return;
-            //    }
-            //    SetLastDayOfMonth();
-            //}
+            Cu_Filter: function (test) {
+                console.log(test);
+                //let F_COM_ID_str = $goc('#F_COM_ID').val();
+                //Vue_obj.CuList = Vue_obj.CuList_Source.filter(data => { return data.F_COM_ID.match(F_COM_ID_str) });
+            },
+            QuerySchedule: function () {
+                ClearMessage();
+                if (Query_InputCheck() == false) {
+                    return;
+                }
+                SetLastDayOfMonth();
+            }
         }
     });
 }
