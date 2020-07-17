@@ -52,42 +52,31 @@ Component_Vue_js.onload = function () {
             CuList_Source: {},
             CuList: {},
             DaysByMonth: {}
+        },
+        updated() {
+            this.$nextTick(function () {
+                $goc('.selectpicker').selectpicker('refresh');
+            });
+        },
+        methods: {
+            Cu_Filter: function () {
+                let F_COM_ID_str = $goc('#F_COM_ID').val();
+                Vue_obj.CuList = Vue_obj.CuList_Source.filter(data => { return data.F_COM_ID.match(F_COM_ID_str) });
+            },
+            QuerySchedule: function () {
+                ClearMessage();
+                if (Query_InputCheck() == false) {
+                    return;
+                }
+                SetLastDayOfMonth();
+            }
         }
     });
+
+
 }
 
 LoadComponent_All();
-
-function AlertMessage(Type_str, Massage_str, Target_obj) {
-    //Type = primary / secondary / success / danger / warning / info / light / dark
-
-    let AlertMessage_obj =
-        `<div class='alert alert-${Type_str}' role='alert'>` +
-        `${Massage_str}` +
-        `<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>` +
-        `</div>`;
-
-    Target_obj.html(AlertMessage_obj);
-}
-
-function ClearMessage(Target_obj) {
-    Target_obj.html('');
-}
-
-function SetDatepicker(Type_str, Target_obj) {
-    //Type = yyyy-mm / yyyy-mm-dd
-
-    Target_obj.datepicker({
-        format: Type_str,
-        startView: 1,
-        minViewMode: 1,
-        clearBtn: true,
-        language: "zh-TW",
-        orientation: "bottom left",
-        autoclose: true,
-        todayHighlight: true
-    });
-}
 
 function LoadComponent_All() {
     LoadComponent_Bootstrap();
@@ -132,4 +121,65 @@ function LoadComponent_Bootstrapselect() {
 
 function LoadComponent_Vue() {
     Head_obj.appendChild(Component_Vue_js);
+}
+
+function AlertMessage(Type_str, Massage_str, Target_obj) {
+    //Type = primary / secondary / success / danger / warning / info / light / dark
+
+    let AlertMessage_obj =
+        `<div class='alert alert-${Type_str}' role='alert'>` +
+        `${Massage_str}` +
+        `<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>` +
+        `</div>`;
+
+    Target_obj.html(AlertMessage_obj);
+}
+
+function ClearMessage() {
+    $goc('.alert').alert('close');
+}
+
+function SetDatepicker(Type_str, Target_obj) {
+    //Type = yyyy-mm / yyyy-mm-dd
+
+    Target_obj.datepicker({
+        format: Type_str,
+        startView: 1,
+        minViewMode: 1,
+        clearBtn: true,
+        language: "zh-TW",
+        orientation: "bottom left",
+        autoclose: true,
+        todayHighlight: true
+    });
+}
+
+function SetComData() {
+    $goc.ajax({
+        type: 'POST',
+        url: 'XMLFORM/AjaxOrder.aspx',
+        data: {
+            Order: 'Get_ComData'
+        },
+        success: function (data) {
+            let JsonData = JSON.parse(data);
+            Vue_obj.ComList = JsonData;
+        }
+    });
+}
+
+function SetCuData(F_COM_ID_str) {
+    $goc.ajax({
+        type: 'POST',
+        url: 'XMLFORM/AjaxOrder.aspx',
+        data: {
+            Order: 'Get_CuData',
+            F_COM_ID: F_COM_ID_str
+        },
+        success: function (data) {
+            let JsonData = JSON.parse(data);
+            Vue_obj.CuList_Source = JsonData;
+            Vue_obj.CuList = Vue_obj.CuList_Source;
+        }
+    });
 }
