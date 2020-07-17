@@ -80,9 +80,15 @@ LoadComponent_All();
 
 function LoadComponent_All() {
     LoadComponent_Bootstrap();
-    LoadComponent_Datepicker();
-    LoadComponent_Bootstrapselect();
-    LoadComponent_Vue();
+    Component_Bootstrap_js.onload = function () {
+        LoadComponent_Datepicker();
+    }
+    Component_Datepicker_lang.onload = function () {
+        LoadComponent_Bootstrapselect();
+    }
+    Component_Bootstrapselect_lang.onload = function () {
+        LoadComponent_Vue();
+    }
 }
 
 function LoadComponent_Bootstrap() {
