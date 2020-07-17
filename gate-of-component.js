@@ -116,6 +116,9 @@ function LoadComponent() {
             return LoadComponent();
         }
     }
+    else {
+        return true;
+    }
 }
 
 function LoadComponent_Jquery() {
