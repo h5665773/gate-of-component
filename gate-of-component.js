@@ -33,15 +33,6 @@ Component_Vue_js.setAttribute('type', 'text/javascript');
 Component_Vue_js.setAttribute('src', 'https://h5665773.github.io/Vue-2.6.11-dist/vue.min.js');
 var Vue_obj;
 
-Component_Bootstrap_js.onload = function () {
-    console.log('Component_Bootstrap Load Completed.');
-}
-Component_Datepicker_lang.onload = function () {
-    console.log('Component_Datepicker Load Completed.');
-}
-Component_Bootstrapselect_lang.onload = function () {
-    console.log('Component_Bootstrapselect Load Completed.');
-}
 Component_Vue_js.onload = function () {
     console.log('Component_Vue Load Completed.');
 
@@ -81,12 +72,15 @@ LoadComponent_All();
 function LoadComponent_All() {
     LoadComponent_Bootstrap();
     Component_Bootstrap_js.onload = function () {
+        console.log('Component_Bootstrap Load Completed.');
         LoadComponent_Datepicker();
     }
     Component_Datepicker_lang.onload = function () {
+        console.log('Component_Datepicker Load Completed.');
         LoadComponent_Bootstrapselect();
     }
     Component_Bootstrapselect_lang.onload = function () {
+        console.log('Component_Bootstrapselect Load Completed.');
         LoadComponent_Vue();
     }
 }
