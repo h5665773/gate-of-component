@@ -61,6 +61,7 @@ var InputData1_objs;
 
 //ex:
 //External_js_Path = 'scriptself/PA1601';
+//MessageArea_obj = $j('#AlertScript');
 //LoadComponents();
 
 
@@ -70,7 +71,6 @@ function LoadComponents() {
         Component_Jquery_js.onload = function () {
 
             $goc = jQuery.noConflict(true);
-            MessageArea_obj = $goc('#AlertScript');
 
             console.log('Component_Jquery Load Completed.');
             Component_Jquery_Enable = true;
