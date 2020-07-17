@@ -8,15 +8,6 @@ var Component_Datepicker_Enable = false;
 var Component_Bootstrapselect_Enable = false;
 var Component_Vue_Enable = false;
 var External_js_Enable = false;
-var isLoadComponent_Jquery = true;
-var isLoadComponent_Bootstrap = true;
-var isLoadComponent_Datepicker = true;
-var isLoadComponent_Bootstrapselect = true;
-var isLoadComponent_Vue = true;
-var isLoadExternal_js = true;
-var External_js_Path = '';
-var Datepicker_obj;
-var Selectpicker_obj;
 
 var Head_obj = document.getElementsByTagName('head')[0];
 var Component_Jquery_js = document.createElement('script');
@@ -51,6 +42,17 @@ Component_Vue_js.setAttribute('type', 'text/javascript');
 Component_Vue_js.setAttribute('src', 'https://h5665773.github.io/Vue-2.6.11-dist/vue.min.js');
 var External_js = document.createElement('script');
 External_js.setAttribute('type', 'text/javascript');
+
+//Client Setting
+var isLoadComponent_Jquery = true;
+var isLoadComponent_Bootstrap = true;
+var isLoadComponent_Datepicker = true;
+var isLoadComponent_Bootstrapselect = true;
+var isLoadComponent_Vue = true;
+var isLoadExternal_js = true;
+var External_js_Path = '';
+var Datepicker_obj;
+var Selectpicker_obj;
 
 function LoadComponent() {
     if (Component_Jquery_Enable == false && isLoadComponent_Jquery == true) {
@@ -182,7 +184,9 @@ function SetVue_obj() {
         },
         updated() {
             this.$nextTick(function () {
-                Selectpicker_obj.selectpicker('refresh');
+                if (Selectpicker_obj != undefined) {
+                    Selectpicker_obj.selectpicker('refresh');
+                }
             });
         },
         methods: {
