@@ -71,7 +71,6 @@ function LoadComponents() {
 
             $goc = jQuery.noConflict(true);
             MessageArea_obj = $goc('#AlertScript');
-            InputData1_objs = $goc(`${InputDataGroup1_class} select,input[type!="search"]`);
 
             console.log('Component_Jquery Load Completed.');
             Component_Jquery_Enable = true;
@@ -268,6 +267,8 @@ function SetCuData(F_COM_ID_str) {
 }
 
 function QuerySchedule_InputCheck() {
+    InputData1_objs = $goc(`${InputDataGroup1_class} select,input[type!="search"]`);
+
     if (InputData1_objs.length > 0) {
         for (let i = 0; i < InputData1_objs.length; i++) {
             let InputData_str = InputData1_objs[i].value;
