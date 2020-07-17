@@ -50,36 +50,6 @@ Component_Vue_js.setAttribute('src', 'https://h5665773.github.io/Vue-2.6.11-dist
 var External_js = document.createElement('script');
 External_js.setAttribute('type', 'text/javascript');
 
-//Vue_obj = new Vue({
-//    el: '#Vue',
-//    data: {
-//        ComList: {},
-//        CuList_Source: {},
-//        CuList: {},
-//        DaysByMonth: {}
-//    },
-//    updated() {
-//        this.$nextTick(function () {
-//            $goc('.selectpicker').selectpicker('refresh');
-//        });
-//    },
-//    methods: {
-//        Cu_Filter: function () {
-//            let F_COM_ID_str = $goc('#F_COM_ID').val();
-//            Vue_obj.CuList = Vue_obj.CuList_Source.filter(data => { return data.F_COM_ID.match(F_COM_ID_str) });
-//        },
-//        QuerySchedule: function () {
-//            ClearMessage();
-//            if (Query_InputCheck() == false) {
-//                return;
-//            }
-//            SetLastDayOfMonth();
-//        }
-//    }
-//});
-
-
-
 function LoadComponent() {
     if (Component_Jquery_Enable == false && isLoadComponent_Jquery == true) {
         LoadComponent_Jquery();
@@ -119,6 +89,7 @@ function LoadComponent() {
         Component_Vue_js.onload = function () {
             console.log('Component_Vue Load Completed.');
             Component_Vue_Enable = true;
+            SetVue_obj();
             return LoadComponent();
         }
     }
@@ -198,19 +169,51 @@ function Padleft_date(str) {
     return str;
 }
 
+function SetVue_obj() {
+    Vue_obj = new Vue({
+        el: '#Vue',
+        data: {
+            ComList: {},
+            CuList_Source: {},
+            CuList: {},
+            DaysByMonth: {}
+        },
+        updated() {
+            //this.$nextTick(function () {
+            //    $goc('.selectpicker').selectpicker('refresh');
+            //});
+        },
+        methods: {
+            //Cu_Filter: function () {
+            //    let F_COM_ID_str = $goc('#F_COM_ID').val();
+            //    Vue_obj.CuList = Vue_obj.CuList_Source.filter(data => { return data.F_COM_ID.match(F_COM_ID_str) });
+            //},
+            //QuerySchedule: function () {
+            //    ClearMessage();
+            //    if (Query_InputCheck() == false) {
+            //        return;
+            //    }
+            //    SetLastDayOfMonth();
+            //}
+        }
+    });
+}
+
 function SetDatepicker(Type_str, Target_obj) {
     //Type = yyyy-mm / yyyy-mm-dd
 
-    Target_obj.datepicker({
-        format: Type_str,
-        startView: 1,
-        minViewMode: 1,
-        clearBtn: true,
-        language: "zh-TW",
-        orientation: "bottom left",
-        autoclose: true,
-        todayHighlight: true
-    });
+    if (Type_str == 'yyyy-mm') {
+        Target_obj.datepicker({
+            format: Type_str,
+            startView: 1,
+            minViewMode: 1,
+            clearBtn: true,
+            language: "zh-TW",
+            orientation: "bottom left",
+            autoclose: true,
+            todayHighlight: true
+        });
+    }
 }
 
 function SetComData() {
