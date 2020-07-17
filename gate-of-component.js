@@ -1,3 +1,19 @@
+var $goc;
+var Vue_obj;
+var Component_Jquery_Enable = false;
+var Component_Bootstrap_Enable = false;
+var Component_Datepicker_Enable = false;
+var Component_Bootstrapselect_Enable = false;
+var Component_Vue_Enable = false;
+var External_js_Enable = false;
+var isLoadComponent_Jquery = true;
+var isLoadComponent_Bootstrap = true;
+var isLoadComponent_Datepicker = true;
+var isLoadComponent_Bootstrapselect = true;
+var isLoadComponent_Vue = true;
+var isLoadExternal_js = true;
+var External_js_Path = '';
+
 var Head_obj = document.getElementsByTagName('head')[0];
 var Component_Jquery_js = document.createElement('script');
 Component_Jquery_js.setAttribute('type', 'text/javascript');
@@ -29,20 +45,12 @@ Component_Bootstrapselect_lang.setAttribute('src', 'https://h5665773.github.io/b
 var Component_Vue_js = document.createElement('script');
 Component_Vue_js.setAttribute('type', 'text/javascript');
 Component_Vue_js.setAttribute('src', 'https://h5665773.github.io/Vue-2.6.11-dist/vue.min.js');
-var $goc;
-var Vue_obj;
-var Component_Jquery_Enable = false;
-var Component_Bootstrap_Enable = false;
-var Component_Datepicker_Enable = false;
-var Component_Bootstrapselect_Enable = false;
-var Component_Vue_Enable = false;
-var isLoadComponent_Jquery = false;
-var isLoadComponent_Bootstrap = false;
-var isLoadComponent_Datepicker = false;
-var isLoadComponent_Bootstrapselect = false;
-var isLoadComponent_Vue = false;
+var External_js = document.createElement('script');
+External_js.setAttribute('type', 'text/javascript');
+External_js.setAttribute('src', `${External_js_Path}.js`);
 
 
+LoadComponent();
 
 //Vue_obj = new Vue({
 //    el: '#Vue',
@@ -116,6 +124,14 @@ function LoadComponent() {
             return LoadComponent();
         }
     }
+    else if (External_js_Enable == false && isLoadExternal_js == true && External_js_Path != '') {
+        LoadExternal_js();
+        External_js.onload = function () {
+            console.log('External_js Load Completed.');
+            External_js_Enable = true;
+            return LoadComponent();
+        }
+    }
 }
 
 function LoadComponent_Jquery() {
@@ -153,6 +169,10 @@ function LoadComponent_Bootstrapselect() {
 
 function LoadComponent_Vue() {
     Head_obj.appendChild(Component_Vue_js);
+}
+
+function LoadExternal_js() {
+    Head_obj.appendChild(External_js);
 }
 
 function AlertMessage(Type_str, Massage_str, Target_obj) {
