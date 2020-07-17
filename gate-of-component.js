@@ -1,7 +1,7 @@
 var $goc;
 var Vue_obj;
 var Date_obj = new Date();
-var Today_str = Date_obj.getFullYear().toString() + Padleft_date(Date_obj.getMonth().toString()) + Padleft_date(Date_obj.getDate().toString());
+var Today_str = Date_obj.getFullYear().toString() + Padleft_date((Date_obj.getMonth() + 1).toString()) + Padleft_date(Date_obj.getDate().toString());
 var Component_Jquery_Enable = false;
 var Component_Bootstrap_Enable = false;
 var Component_Datepicker_Enable = false;
