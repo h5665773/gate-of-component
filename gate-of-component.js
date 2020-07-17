@@ -67,91 +67,92 @@ var Vue_obj;
 function LoadComponent_All() {
     return new Promise((resolve, reject) => {
         LoadComponent_Jquery().then(
-            LoadComponent_Bootstrap().then(
-                LoadComponent_Datepicker().then(
-                    LoadComponent_Bootstrapselect().then(
-                        LoadComponent_Vue().then(function () {
-                            console.log('Component_All Load Completed.');
-                            resolve('Component_All Load Completed.');
-                        })
-                    )
-                )
-            )
-        );
+            LoadComponent_Bootstrap()
+        ).then(
+            LoadComponent_Datepicker()
+        ).then(
+            LoadComponent_Bootstrapselect()
+        ).then(
+            LoadComponent_Vue()
+        ).then(function () {
+            console.log('Component_All Load Completed.');
+            resolve('Component_All Load Completed.');
+        });
     });
 }
 
 function LoadComponent_Jquery() {
-    return new Promise((resolve, reject) => {
-        Head_obj.appendChild(Component_Jquery_js);
+    Head_obj.appendChild(Component_Jquery_js);
 
+    return new Promise((resolve, reject) => {
         Component_Jquery_js.onload = function () {
             $goc = jQuery.noConflict(true);
             console.log('Component_Jquery Load Completed.');
             resolve('Component_Jquery Load Completed.');
+
         }
     });
 }
 
 function LoadComponent_Bootstrap() {
-    return new Promise((resolve, reject) => {
-        Head_obj.appendChild(Component_Bootstrap_css);
-        Component_Bootstrap_css.onload = function () {
-            Head_obj.appendChild(Component_Bootstrap_js);
-        }
+    Head_obj.appendChild(Component_Bootstrap_css);
+    Component_Bootstrap_css.onload = function () {
+        Head_obj.appendChild(Component_Bootstrap_js);
+    }
 
-        Component_Bootstrap_js.onload = function () {
+    Component_Bootstrap_js.onload = function () {
+        return new Promise((resolve, reject) => {
             console.log('Component_Bootstrap Load Completed.');
             resolve('Component_Bootstrap Load Completed.');
-        }
-    });
+        });
+    }
 }
 
 function LoadComponent_Datepicker() {
-    return new Promise((resolve, reject) => {
-        Head_obj.appendChild(Component_Datepicker_css);
-        Component_Datepicker_css.onload = function () {
-            Head_obj.appendChild(Component_Datepicker_js);
-        }
-        Component_Datepicker_js.onload = function () {
-            Head_obj.appendChild(Component_Datepicker_lang);
-        }
+    Head_obj.appendChild(Component_Datepicker_css);
+    Component_Datepicker_css.onload = function () {
+        Head_obj.appendChild(Component_Datepicker_js);
+    }
+    Component_Datepicker_js.onload = function () {
+        Head_obj.appendChild(Component_Datepicker_lang);
+    }
 
-        Component_Datepicker_lang.onload = function () {
+    Component_Datepicker_lang.onload = function () {
+        return new Promise((resolve, reject) => {
             console.log('Component_Datepicker Load Completed.');
             resolve('Component_Datepicker Load Completed.');
-        }
-    });
+        });
+    }
 }
 
 function LoadComponent_Bootstrapselect() {
-    return new Promise((resolve, reject) => {
-        Head_obj.appendChild(Component_Bootstrapselect_css);
-        Component_Bootstrapselect_css.onload = function () {
+    Head_obj.appendChild(Component_Bootstrapselect_css);
+    Component_Bootstrapselect_css.onload = function () {
 
-            Head_obj.appendChild(Component_Bootstrapselect_js);
-        }
-        Component_Bootstrapselect_js.onload = function () {
+        Head_obj.appendChild(Component_Bootstrapselect_js);
+    }
+    Component_Bootstrapselect_js.onload = function () {
 
-            Head_obj.appendChild(Component_Bootstrapselect_lang);
-        }
+        Head_obj.appendChild(Component_Bootstrapselect_lang);
+    }
 
-        Component_Bootstrapselect_lang.onload = function () {
+    Component_Bootstrapselect_lang.onload = function () {
+        return new Promise((resolve, reject) => {
             console.log('Component_Bootstrapselect Load Completed.');
             resolve('Component_Bootstrapselect Load Completed.');
-        }
-    });
+        });
+    }
 }
 
 function LoadComponent_Vue() {
-    return new Promise((resolve, reject) => {
-        Head_obj.appendChild(Component_Vue_js);
+    Head_obj.appendChild(Component_Vue_js);
 
-        Component_Vue_js.onload = function () {
+    Component_Vue_js.onload = function () {
+        return new Promise((resolve, reject) => {
             console.log('Component_Vue Load Completed.');
             resolve('Component_Vue Load Completed.');
-        }
-    });
+        });
+    }
 }
 
 function AlertMessage(Type_str, Massage_str, Target_obj) {
