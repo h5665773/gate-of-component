@@ -178,7 +178,7 @@ function AlertMessage(Type_str, Massage_str) {
 }
 
 function ClearMessage() {
-    $goc('.alert').alert('close');
+    MessageArea_obj.html('');
 }
 
 function Padleft_date(str) {
