@@ -69,31 +69,31 @@ function LoadComponent_All() {
         LoadComponent_Jquery()
             .then(
                 success => {
-                    console.log(success);
+                    console.log('success:'+success);
                     LoadComponent_Bootstrap();
                 }
             )
             .then(
                 success => {
-                    console.log(success);
+                    console.log('success:' +success);
                     LoadComponent_Datepicker();
                 }
             )
             .then(
                 success => {
-                    console.log(success);
+                    console.log('success:' +success);
                     LoadComponent_Bootstrapselect();
                 }
             )
             .then(
                 success => {
-                    console.log(success);
+                    console.log('success:' +success);
                     LoadComponent_Vue();
                 }
             )
             .then(
                 success => {
-                    console.log(success);
+                    console.log('success:' +success);
                     console.log('Component_All Load Completed.');
                     resolve('Component_All Load Completed.');
                 }
