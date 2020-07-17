@@ -1,6 +1,7 @@
 var $goc;
 var Vue_obj;
-var Today_str = (new Date).getFullYear().toString() + (new Date).getMonth().toString() + (new Date).getDate().toString();
+var Date_obj = new Date();
+var Today_str = Date_obj.getFullYear().toString() + Padleft_date(Date_obj.getMonth().toString()) + Padleft_date(Date_obj.getDate().toString());
 var Component_Jquery_Enable = false;
 var Component_Bootstrap_Enable = false;
 var Component_Datepicker_Enable = false;
@@ -190,6 +191,14 @@ function AlertMessage(Type_str, Massage_str, Target_obj) {
 
 function ClearMessage() {
     $goc('.alert').alert('close');
+}
+
+function Padleft_date(str) {
+    if (str.length < 2) {
+        str = '0' + str;
+    }
+
+    return str;
 }
 
 function SetDatepicker(Type_str, Target_obj) {
