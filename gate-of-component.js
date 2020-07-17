@@ -69,7 +69,7 @@ function LoadComponents() {
             $goc = jQuery.noConflict(true);
             console.log('Component_Jquery Load Completed.');
             Component_Jquery_Enable = true;
-            return LoadComponent();
+            return LoadComponents();
         }
     }
     else if (Component_Bootstrap_Enable == false && isLoadComponent_Bootstrap == true) {
@@ -77,7 +77,7 @@ function LoadComponents() {
         Component_Bootstrap_js.onload = function () {
             console.log('Component_Bootstrap Load Completed.');
             Component_Bootstrap_Enable = true;
-            return LoadComponent();
+            return LoadComponents();
         }
     }
     else if (Component_Datepicker_Enable == false && isLoadComponent_Datepicker == true) {
@@ -85,7 +85,7 @@ function LoadComponents() {
         Component_Datepicker_lang.onload = function () {
             console.log('Component_Datepicker Load Completed.');
             Component_Datepicker_Enable = true;
-            return LoadComponent();
+            return LoadComponents();
         }
     }
     else if (Component_Bootstrapselect_Enable == false && isLoadComponent_Bootstrapselect == true) {
@@ -93,7 +93,7 @@ function LoadComponents() {
         Component_Bootstrapselect_lang.onload = function () {
             console.log('Component_Bootstrapselect Load Completed.');
             Component_Bootstrapselect_Enable = true;
-            return LoadComponent();
+            return LoadComponents();
         }
     }
     else if (Component_Vue_Enable == false && isLoadComponent_Vue == true) {
@@ -102,7 +102,7 @@ function LoadComponents() {
             console.log('Component_Vue Load Completed.');
             Component_Vue_Enable = true;
             SetVue_obj();
-            return LoadComponent();
+            return LoadComponents();
         }
     }
     else if (External_js_Enable == false && isLoadExternal_js == true && External_js_Path != '') {
@@ -110,7 +110,7 @@ function LoadComponents() {
         External_js.onload = function () {
             console.log('External_js Load Completed.');
             External_js_Enable = true;
-            return LoadComponent();
+            return LoadComponents();
         }
     }
 }
