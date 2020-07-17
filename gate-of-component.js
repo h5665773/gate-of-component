@@ -52,12 +52,12 @@ var isLoadComponent_Bootstrapselect = true;
 var isLoadComponent_Vue = true;
 var isLoadExternal_js = true;
 var External_js_Path = '';
-var MessageArea_obj = $goc('#AlertScript');
+var MessageArea_obj;
 var Selectpicker_obj;
 var Datepicker_obj;
 var AjaxUrl_str = 'XMLFORM/AjaxOrder.aspx';
 var InputDataGroup1_class = '.inputdata-1';
-var InputData1_objs = $goc(`${InputDataGroup1_class} select,input[type!="search"]`);
+var InputData1_objs;
 
 //ex:
 //External_js_Path = 'scriptself/PA1601';
@@ -68,7 +68,11 @@ function LoadComponents() {
     if (Component_Jquery_Enable == false && isLoadComponent_Jquery == true) {
         LoadComponent_Jquery();
         Component_Jquery_js.onload = function () {
+
             $goc = jQuery.noConflict(true);
+            MessageArea_obj = $goc('#AlertScript');
+            InputData1_objs = $goc(`${InputDataGroup1_class} select,input[type!="search"]`);
+
             console.log('Component_Jquery Load Completed.');
             Component_Jquery_Enable = true;
             return LoadComponents();
