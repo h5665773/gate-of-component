@@ -9,7 +9,7 @@ Component_Bootstrap_css.setAttribute('rel', 'stylesheet');
 Component_Bootstrap_css.setAttribute('href', 'https://h5665773.github.io/bootstrap-4.5.0-dist/css/bootstrap.min.css');
 var Component_Bootstrap_js = document.createElement('script');
 Component_Bootstrap_js.setAttribute('type', 'text/javascript');
-Component_Bootstrap_js.setAttribute('src', 'https://h5665773.github.io/bootstrap-4.5.0-dist/js/bootstrap.min.js');
+Component_Bootstrap_js.setAttribute('src', 'https://h5665773.github.io/bootstrap-4.5.0-dist/js/bootstrap.bundle.min.js');
 var Component_Datepicker_css = document.createElement('link');
 Component_Datepicker_css.setAttribute('rel', 'stylesheet');
 Component_Datepicker_css.setAttribute('href', 'https://h5665773.github.io/bootstrap-datepicker-1.9.0-dist/css/bootstrap-datepicker.min.css');
