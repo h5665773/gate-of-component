@@ -66,37 +66,17 @@ var Vue_obj;
 
 function LoadComponent_All() {
     return new Promise((resolve, reject) => {
-        LoadComponent_Jquery()
-            .then(
-                success => {
-                    console.log('success:'+success);
-                    LoadComponent_Bootstrap();
-                }
+        LoadComponent_Jquery().then(
+            LoadComponent_Bootstrap().then(
+                LoadComponent_Datepicker().then(
+                    LoadComponent_Bootstrapselect().then(
+                        LoadComponent_Vue().then(function () {
+                            console.log('Component_All Load Completed.');
+                            resolve('Component_All Load Completed.');
+                        })
+                    )
+                )
             )
-            .then(
-                success => {
-                    console.log('success:' +success);
-                    LoadComponent_Datepicker();
-                }
-            )
-            .then(
-                success => {
-                    console.log('success:' +success);
-                    LoadComponent_Bootstrapselect();
-                }
-            )
-            .then(
-                success => {
-                    console.log('success:' +success);
-                    LoadComponent_Vue();
-                }
-            )
-            .then(
-                success => {
-                    console.log('success:' +success);
-                    console.log('Component_All Load Completed.');
-                    resolve('Component_All Load Completed.');
-                }
         );
     });
 }
