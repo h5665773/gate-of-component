@@ -75,6 +75,8 @@ function LoadComponent_All() {
         ).then(
             LoadComponent_Vue()
         );
+        console.log('Component_All Load Completed.');
+        resolve('Component_All Load Completed.');
     });
 }
 
