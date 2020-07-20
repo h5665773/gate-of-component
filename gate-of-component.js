@@ -1,4 +1,4 @@
-//Core Settings
+ï»¿//Core Settings
 var $goc;
 var Vue_obj;
 var Date_obj = new Date();
@@ -211,7 +211,7 @@ function SetVue_obj() {
             Cu_Filter: function (F_COM_ID_str) {
                 Vue_obj.CuList = Vue_obj.CuList_Source.filter(data => { return data.F_COM_ID.match(F_COM_ID_str); });
             },
-            QuerySchedule: function (F_CU_ID_str,F_YM_str) {
+            QuerySchedule: function (F_CU_ID_str, F_YM_str) {
                 ClearMessage();
                 if (QuerySchedule_InputCheck() == false) {
                     return;
@@ -276,7 +276,7 @@ function QuerySchedule_InputCheck() {
         for (let i = 0; i < InputData1_objs.length; i++) {
             let InputData_str = InputData1_objs[i].value;
             if (InputData_str == '') {
-                AlertMessage('warning', '½Ð¿é¤J¬d¸ß±ø¥ó¡I');
+                AlertMessage('warning', 'è«‹è¼¸å…¥æŸ¥è©¢æ¢ä»¶ï¼');
                 return false;
             }
         }
@@ -287,7 +287,7 @@ function QuerySchedule_InputCheck() {
 function SetLastDayOfMonth(Date_yyyymm_str) {
     let LastDayOfMonth_date = new Date(Date_yyyymm_str);
     let SetLastDayOfMonth_int = 0;
-    let DayList = ['¤é', '¤@', '¤G', '¤T', '¥|', '¤­', '¤»'];
+    let DayList = ['æ—¥', 'ä¸€', 'äºŒ', 'ä¸‰', 'å››', 'äº”', 'å…­'];
     let DaysByMonth_str = "[";
 
     LastDayOfMonth_date.setMonth(LastDayOfMonth_date.getMonth() + 1);
