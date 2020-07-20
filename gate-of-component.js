@@ -225,7 +225,7 @@ function SetVue_obj() {
                     return;
                 }
                 SetLastDayOfMonth(F_YM_str);
-                Get_SentinelSchedule(F_CU_ID_str, F_YM_str);
+                Get_SentinelSchedule(F_CU_ID_str, F_YM_str, DaysByMonth.length);
             }
         }
     });
@@ -325,14 +325,15 @@ function SetLastDayOfMonth(Date_yyyymm_str) {
     Vue_obj.DaysByMonth = JSON.parse(DaysByMonth_str);
 }
 
-function Get_SentinelSchedule(F_CU_ID_str, F_YM_str) {
+function Get_SentinelSchedule(F_CU_ID_str, F_YM_str, LastDayofMonth_str) {
     $goc.ajax({
         type: 'POST',
         url: AjaxUrl_str,
         data: {
             Order: 'Get_SentinelSchedule',
             F_CU_ID: F_CU_ID_str,
-            F_YM: F_YM_str
+            F_YM: F_YM_str,
+            LastDayofMonth: LastDayofMonth_str
         },
         success: function (data) {
             let JsonData = JSON.parse(data);
