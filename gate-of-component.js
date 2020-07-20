@@ -206,7 +206,7 @@ function SetVue_obj() {
             CuList_Source: {},
             CuList: {},
             DaysByMonth: {},
-            Schedule: {}
+            SentinelSchedule: {}
         },
         updated() {
             this.$nextTick(function () {
@@ -336,7 +336,7 @@ function Get_SentinelSchedule(F_CU_ID_str, F_YM_str) {
         },
         success: function (data) {
             let JsonData = JSON.parse(data);
-            Vue_obj.Schedule = JsonData;
+            Vue_obj.SentinelSchedule = JsonData;
         }
     });
 }
