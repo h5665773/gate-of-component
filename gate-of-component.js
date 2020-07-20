@@ -225,7 +225,7 @@ function SetVue_obj() {
                     return;
                 }
                 SetLastDayOfMonth(F_YM_str);
-                Get_SentinelSchedule(F_CU_ID_str, F_YM_str, DaysByMonth.length);
+                Get_SentinelSchedule(F_CU_ID_str, F_YM_str, Vue_obj.DaysByMonth.length);
             }
         }
     });
