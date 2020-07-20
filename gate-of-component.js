@@ -9,8 +9,8 @@ var Component_Datepicker_Enable = false;
 var Component_Bootstrapselect_Enable = false;
 var Component_Vue_Enable = false;
 var External_js_Enable = false;
-
 var Head_obj = document.getElementsByTagName('head')[0];
+
 var Component_Jquery_js = document.createElement('script');
 Component_Jquery_js.setAttribute('type', 'text/javascript');
 Component_Jquery_js.setAttribute('src', 'https://h5665773.github.io/jquery-3.5.1-dist/jquery-3.5.1.min.js');
@@ -64,7 +64,7 @@ var InputData1_objs;
 //MessageArea_obj = $j('#AlertScript');
 //LoadComponents();
 
-
+//Components On/Off
 function LoadComponents() {
     if (Component_Jquery_Enable == false && isLoadComponent_Jquery == true) {
         LoadComponent_Jquery();
@@ -119,6 +119,13 @@ function LoadComponents() {
         }
     }
 }
+//ex:
+//isLoadComponent_Jquery = true;
+//isLoadComponent_Bootstrap = true;
+//isLoadComponent_Datepicker = true;
+//isLoadComponent_Bootstrapselect = true;
+//isLoadComponent_Vue = true;
+//isLoadExternal_js = true;
 
 function LoadComponent_Jquery() {
     Head_obj.appendChild(Component_Jquery_js);
@@ -198,7 +205,8 @@ function SetVue_obj() {
             ComList: {},
             CuList_Source: {},
             CuList: {},
-            DaysByMonth: {}
+            DaysByMonth: {},
+            Schedule: {}
         },
         updated() {
             this.$nextTick(function () {
@@ -213,7 +221,7 @@ function SetVue_obj() {
             },
             QuerySchedule: function (F_CU_ID_str, F_YM_str) {
                 ClearMessage();
-                if (QuerySchedule_InputCheck() == false) {
+                if (InputCheck() == false) {
                     return;
                 }
                 SetLastDayOfMonth(F_YM_str);
@@ -222,7 +230,7 @@ function SetVue_obj() {
     });
 }
 
-function SetDatepicker(Type_str, Target_obj) {
+function Set_Datepicker(Type_str, Target_obj) {
     //Type = yyyy-mm / yyyy-mm-dd
 
     if (Type_str == 'yyyy-mm') {
@@ -239,7 +247,7 @@ function SetDatepicker(Type_str, Target_obj) {
     }
 }
 
-function SetComData() {
+function Set_ComData() {
     $goc.ajax({
         type: 'POST',
         url: AjaxUrl_str,
@@ -253,7 +261,7 @@ function SetComData() {
     });
 }
 
-function SetCuData(F_COM_ID_str) {
+function Set_CuData(F_COM_ID_str) {
     $goc.ajax({
         type: 'POST',
         url: AjaxUrl_str,
@@ -269,7 +277,7 @@ function SetCuData(F_COM_ID_str) {
     });
 }
 
-function QuerySchedule_InputCheck() {
+function InputCheck() {
     InputData1_objs = $goc(`${InputDataGroup1_class} select,input[type!="search"]`);
 
     if (InputData1_objs.length > 0) {
@@ -314,4 +322,18 @@ function SetLastDayOfMonth(Date_yyyymm_str) {
     DaysByMonth_str += "]"
 
     Vue_obj.DaysByMonth = JSON.parse(DaysByMonth_str);
+}
+
+function Get_Schedule() {
+    $goc.ajax({
+        type: 'POST',
+        url: AjaxUrl_str,
+        data: {
+            Order: 'Get_Schedule'
+        },
+        success: function (data) {
+            let JsonData = JSON.parse(data);
+            Vue_obj.Schedule = JsonData;
+        }
+    });
 }
