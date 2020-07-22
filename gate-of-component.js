@@ -102,11 +102,13 @@ function LoadComponents() {
         }
     }
     else if (Component_Vue_Enable == false && isLoadComponent_Vue == true) {
+        document.getElementById('Vue').style.display = 'none';
         LoadComponent_Vue();
         Component_Vue_js.onload = function () {
             console.log('Component_Vue Load Completed.');
             Component_Vue_Enable = true;
             SetVue_obj();
+            document.getElementById('Vue').style.display = '';
             return LoadComponents();
         }
     }
