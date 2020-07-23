@@ -335,7 +335,7 @@ function Set_HourList() {
     let HourList_str = "[";
 
     for (let i = 0; i < 24; i++) {
-        let Hour = PadLeft((i + 1).toString(), '0', 2);
+        let Hour = PadLeft((i).toString(), '0', 2);
 
         HourList_str += `{"Hour":"${Hour}:00"}`;
 
