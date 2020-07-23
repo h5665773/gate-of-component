@@ -2,7 +2,7 @@
 var $goc;
 var Vue_obj;
 var Date_obj = new Date();
-var Today_str = Date_obj.getFullYear().toString() + Padleft_date((Date_obj.getMonth() + 1).toString()) + Padleft_date(Date_obj.getDate().toString());
+var Today_str = Date_obj.getFullYear().toString() + PadLeft((Date_obj.getMonth() + 1).toString(), '0', 2) + PadLeft(Date_obj.getDate().toString(), '0', 2);
 var Component_Jquery_Enable = false;
 var Component_Bootstrap_Enable = false;
 var Component_Datepicker_Enable = false;
@@ -192,12 +192,12 @@ function ClearMessage() {
     MessageArea_obj.html('');
 }
 
-function Padleft_date(str) {
-    if (str.length < 2) {
-        str = '0' + str;
+function PadLeft(Target_str, Padding_str, TotalWidth_int) {
+    if (Target_str.length < TotalWidth_int) {
+        Target_str = Padding_str + Target_str;
     }
 
-    return str;
+    return Target_str;
 }
 
 function SetVue_obj() {
@@ -210,7 +210,8 @@ function SetVue_obj() {
             DaysByMonth: {},
             SentinelList: {},
             SentinelMember: {},
-            MemberSchedule: {}
+            MemberSchedule: {},
+            HourList: {}
         },
         updated() {
             this.$nextTick(function () {
@@ -228,8 +229,9 @@ function SetVue_obj() {
                 if (InputCheck() == false) {
                     return;
                 }
-                SetLastDayOfMonth(F_YM_str);
+                Set_LastDayOfMonth(F_YM_str);
                 Get_SentinelSchedule(F_CU_ID_str, F_YM_str, Vue_obj.DaysByMonth.length);
+                Set_HourList();
             }
         }
     });
@@ -297,19 +299,19 @@ function InputCheck() {
     return true;
 }
 
-function SetLastDayOfMonth(Date_yyyymm_str) {
+function Set_LastDayOfMonth(Date_yyyymm_str) {
     let LastDayOfMonth_date = new Date(Date_yyyymm_str);
-    let SetLastDayOfMonth_int = 0;
+    let LastDayOfMonth_int = 0;
     let DayList = ['日', '一', '二', '三', '四', '五', '六'];
     let DaysByMonth_str = "[";
 
     LastDayOfMonth_date.setMonth(LastDayOfMonth_date.getMonth() + 1);
     LastDayOfMonth_date.setDate(1);
     LastDayOfMonth_date.setDate(LastDayOfMonth_date.getDate() - 1);
-    SetLastDayOfMonth_int = parseInt(LastDayOfMonth_date.getDate());
+    LastDayOfMonth_int = parseInt(LastDayOfMonth_date.getDate());
     LastDayOfMonth_date.setDate(1);
 
-    for (let i = 0; i < SetLastDayOfMonth_int; i++) {
+    for (let i = 0; i < LastDayOfMonth_int; i++) {
         let Day = DayList[LastDayOfMonth_date.getDay()];
         let idx = (i + 1);
         if (idx.toString().length == 1) {
@@ -318,7 +320,7 @@ function SetLastDayOfMonth(Date_yyyymm_str) {
 
         DaysByMonth_str += `{"DayNo":"${idx}","Day":"${Day}"}`;
 
-        if (i != SetLastDayOfMonth_int - 1) {
+        if (i != LastDayOfMonth_int - 1) {
             DaysByMonth_str += ",";
         }
 
@@ -327,6 +329,23 @@ function SetLastDayOfMonth(Date_yyyymm_str) {
     DaysByMonth_str += "]"
 
     Vue_obj.DaysByMonth = JSON.parse(DaysByMonth_str);
+}
+
+function Set_HourList() {
+    let HourList_str = "[";
+
+    for (let i = 0; i < 24; i++) {
+        let Hour = PadLeft((i + 1), '0', 2);
+
+        HourList_str += `{"Hour":"${Hour}:00"}`;
+
+        if (i != 23) {
+            HourList_str += ",";
+        }
+    }
+    HourList_str += "]";
+
+    Vue_obj.HourList = JSON.parse(HourList_str);
 }
 
 function Get_SentinelSchedule(F_CU_ID_str, F_YM_str, LastDayofMonth_str) {
@@ -347,4 +366,8 @@ function Get_SentinelSchedule(F_CU_ID_str, F_YM_str, LastDayofMonth_str) {
             Vue_obj.MemberSchedule = JsonData.MemberSchedule;
         }
     });
+}
+
+function Show_Schedule_ByDay(Modal_obj, ModalTitle_str,) {
+
 }
