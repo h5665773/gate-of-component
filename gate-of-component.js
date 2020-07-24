@@ -357,9 +357,6 @@ function Get_SentinelSchedule(F_CU_ID_str, F_YM_str, LastDayofMonth_str) {
 
 function Show_Modal(F_CLASS_str, F_DAY_str, F_POINT_NAME_str, F_EMP_ID_str, F_EMP_NAME_str, ModalLabel_obj) {
     ModalLabel_obj.html(`${F_POINT_NAME_str} - ${F_EMP_NAME_str}`);
-    Vue_obj.MemberScheduleDetail = Vue_obj.MemberScheduleDetail_Source.filter(data => {
-        let MatchData1 = data.F_DAY.match(F_DAY_str);
-        let MatchData2 = MatchData1.F_EMP_ID.match(F_EMP_ID_str);
-        return MatchData2;
-    });
+    Vue_obj.MemberScheduleDetail = Vue_obj.MemberScheduleDetail_Source.filter(data => { return data.F_DAY.match(F_DAY_str); });
+    Vue_obj.MemberScheduleDetail = Vue_obj.MemberScheduleDetail.filter(data => { return data.F_EMP_ID.match(F_EMP_ID_str); });
 }
