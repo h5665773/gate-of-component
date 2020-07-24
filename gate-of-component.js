@@ -211,6 +211,7 @@ function SetVue_obj() {
             SentinelList: {},
             SentinelMember: {},
             MemberSchedule: {},
+            MemberScheduleDetail: {},
             HourList: {}
         },
         updated() {
@@ -364,10 +365,7 @@ function Get_SentinelSchedule(F_CU_ID_str, F_YM_str, LastDayofMonth_str) {
             Vue_obj.SentinelList = JsonData.SentinelList;
             Vue_obj.SentinelMember = JsonData.SentinelMember;
             Vue_obj.MemberSchedule = JsonData.MemberSchedule;
+            Vue_obj.MemberScheduleDetail = JsonData.MemberScheduleDetail;
         }
     });
-}
-
-function Show_Schedule_ByDay(Modal_obj, ModalTitle_str,) {
-
 }
