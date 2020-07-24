@@ -211,8 +211,8 @@ function SetVue_obj() {
             SentinelList: {},
             SentinelMember: {},
             MemberSchedule: {},
-            MemberScheduleDetail: {},
-            HourList: {}
+            MemberScheduleDetail_Source: {},
+            MemberScheduleDetail: {}
         },
         updated() {
             this.$nextTick(function () {
@@ -232,7 +232,9 @@ function SetVue_obj() {
                 }
                 Set_LastDayOfMonth(F_YM_str);
                 Get_SentinelSchedule(F_CU_ID_str, F_YM_str, Vue_obj.DaysByMonth.length);
-                Set_HourList();
+            },
+            Show_Modal: function (F_CLASS_str, F_DAY_str, F_POINT_NAME_str, F_EMP_ID_str, F_EMP_NAME_str, ModalLabel_obj) {
+                Show_Modal(F_CLASS_str, F_DAY_str, F_POINT_NAME_str, F_EMP_NAME_str, ModalLabel_obj);
             }
         }
     });
@@ -332,23 +334,6 @@ function Set_LastDayOfMonth(Date_yyyymm_str) {
     Vue_obj.DaysByMonth = JSON.parse(DaysByMonth_str);
 }
 
-function Set_HourList() {
-    let HourList_str = "[";
-
-    for (let i = 0; i < 24; i++) {
-        let Hour = PadLeft((i).toString(), '0', 2);
-
-        HourList_str += `{"Hour":"${Hour}:00"}`;
-
-        if (i != 23) {
-            HourList_str += ",";
-        }
-    }
-    HourList_str += "]";
-
-    Vue_obj.HourList = JSON.parse(HourList_str);
-}
-
 function Get_SentinelSchedule(F_CU_ID_str, F_YM_str, LastDayofMonth_str) {
     $goc.ajax({
         type: 'POST',
@@ -365,7 +350,16 @@ function Get_SentinelSchedule(F_CU_ID_str, F_YM_str, LastDayofMonth_str) {
             Vue_obj.SentinelList = JsonData.SentinelList;
             Vue_obj.SentinelMember = JsonData.SentinelMember;
             Vue_obj.MemberSchedule = JsonData.MemberSchedule;
-            Vue_obj.MemberScheduleDetail = JsonData.MemberScheduleDetail;
+            Vue_obj.MemberScheduleDetail_Source = JsonData.MemberScheduleDetail;
         }
+    });
+}
+
+function Show_Modal(F_CLASS_str, F_DAY_str, F_POINT_NAME_str, F_EMP_ID_str, F_EMP_NAME_str, ModalLabel_obj) {
+    ModalLabel_obj.val(`${F_POINT_NAME_str} - ${F_EMP_NAME_str}`);
+    Vue_obj.MemberScheduleDetail = Vue_obj.MemberScheduleDetail_Source.filter(data => {
+        let MatchData = data.F_DAY.match(F_DAY_str);
+        MatchData = MatchData.F_EMP_ID.match(F_EMP_ID_str);
+        return MatchData;
     });
 }
