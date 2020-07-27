@@ -79,7 +79,7 @@ function LoadComponents_test(Component_obj, isLoadComponent) {
                 resolve('success');
         };
         if (isLoadComponent) {
-            CoreSetting.Component_InstallationTarget_obj.appendChild(CoreSetting.Component_obj);
+            CoreSetting.Component_InstallationTarget_obj.appendChild(Component_obj);
         }
     });
 }
