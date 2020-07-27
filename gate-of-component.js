@@ -84,33 +84,33 @@ function LoadComponents_test(Component_obj, isLoadComponent) {
     });
 }
 function test() {
-    LoadComponents_test(Component_Jquery_js, isLoadComponent_Jquery)
+    LoadComponents_test(CoreSetting.Component_Jquery_js, isLoadComponent_Jquery)
         .then(function () {
             $goc = jQuery.noConflict(true);
             console.log('Component_Jquery Load Completed.');
-            return LoadComponents_test(Component_Bootstrap_css, isLoadComponent_Bootstrap);
+            return LoadComponents_test(CoreSetting.Component_Bootstrap_css, isLoadComponent_Bootstrap);
         }).then(function () {
-            return LoadComponents_test(Component_Bootstrap_js, isLoadComponent_Bootstrap);
+            return LoadComponents_test(CoreSetting.Component_Bootstrap_js, isLoadComponent_Bootstrap);
         }).then(function () {
             console.log('Component_Bootstrap Load Completed.');
-            return LoadComponents_test(Component_Datepicker_css, isLoadComponent_Datepicker);
+            return LoadComponents_test(CoreSetting.Component_Datepicker_css, isLoadComponent_Datepicker);
         }).then(function () {
-            return LoadComponents_test(Component_Datepicker_js, isLoadComponent_Datepicker);
+            return LoadComponents_test(CoreSetting.Component_Datepicker_js, isLoadComponent_Datepicker);
         }).then(function () {
-            return LoadComponents_test(Component_Datepicker_lang, isLoadComponent_Datepicker);
+            return LoadComponents_test(CoreSetting.Component_Datepicker_lang, isLoadComponent_Datepicker);
         }).then(function () {
             console.log('Component_Datepicker Load Completed.');
-            return LoadComponents_test(Component_Bootstrapselect_css, isLoadComponent_Bootstrapselect);
+            return LoadComponents_test(CoreSetting.Component_Bootstrapselect_css, isLoadComponent_Bootstrapselect);
         }).then(function () {
-            return LoadComponents_test(Component_Bootstrapselect_js, isLoadComponent_Bootstrapselect);
+            return LoadComponents_test(CoreSetting.Component_Bootstrapselect_js, isLoadComponent_Bootstrapselect);
         }).then(function () {
-            return LoadComponents_test(Component_Bootstrapselect_lang, isLoadComponent_Bootstrapselect);
+            return LoadComponents_test(CoreSetting.Component_Bootstrapselect_lang, isLoadComponent_Bootstrapselect);
         }).then(function () {
             console.log('Component_Bootstrapselect Load Completed.');
-            return LoadComponents_test(Component_Vue_js, isLoadComponent_Vue);
+            return LoadComponents_test(CoreSetting.Component_Vue_js, isLoadComponent_Vue);
         }).then(function () {
             console.log('Component_Vue Load Completed.');
-            return LoadComponents_test(Component_External_js, isLoadComponent_External_js);
+            return LoadComponents_test(CoreSetting.Component_External_js, isLoadComponent_External_js);
             console.log('Component_External_js Load Completed.');
         });
 }
