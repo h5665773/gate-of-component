@@ -1,14 +1,22 @@
 ﻿//Core Settings
+var CoreSetting = new Object({
+    Component_Jquery_Enable: false,
+    Component_Bootstrap_Enable: false,
+    Component_Datepicker_Enable: false,
+    Component_Bootstrapselect_Enable: false,
+    Component_Vue_Enable: false,
+    External_js_Enable: false
+});
+
+var test = 'test';
+let test2 = 'test2';
+
 var $goc;
 var Vue_obj;
 var Date_obj = new Date();
 var Today_str = Date_obj.getFullYear().toString() + PadLeft((Date_obj.getMonth() + 1).toString(), '0', 2) + PadLeft(Date_obj.getDate().toString(), '0', 2);
-var Component_Jquery_Enable = false;
-var Component_Bootstrap_Enable = false;
-var Component_Datepicker_Enable = false;
-var Component_Bootstrapselect_Enable = false;
-var Component_Vue_Enable = false;
-var External_js_Enable = false;
+
+
 var Head_obj = document.getElementsByTagName('head')[0];
 
 var Component_Jquery_js = document.createElement('script');
@@ -66,57 +74,57 @@ var InputData1_objs;
 
 //Components On/Off
 function LoadComponents() {
-    if (Component_Jquery_Enable == false && isLoadComponent_Jquery == true) {
+    if (CoreSetting.Component_Jquery_Enable == false && isLoadComponent_Jquery == true) {
         LoadComponent_Jquery();
         Component_Jquery_js.onload = function () {
 
             $goc = jQuery.noConflict(true);
 
             console.log('Component_Jquery Load Completed.');
-            Component_Jquery_Enable = true;
+            CoreSetting.Component_Jquery_Enable = true;
             return LoadComponents();
         }
     }
-    else if (Component_Bootstrap_Enable == false && isLoadComponent_Bootstrap == true) {
+    else if (CoreSetting.Component_Bootstrap_Enable == false && isLoadComponent_Bootstrap == true) {
         LoadComponent_Bootstrap();
         Component_Bootstrap_js.onload = function () {
             console.log('Component_Bootstrap Load Completed.');
-            Component_Bootstrap_Enable = true;
+            CoreSetting.Component_Bootstrap_Enable = true;
             return LoadComponents();
         }
     }
-    else if (Component_Datepicker_Enable == false && isLoadComponent_Datepicker == true) {
+    else if (CoreSetting.Component_Datepicker_Enable == false && isLoadComponent_Datepicker == true) {
         LoadComponent_Datepicker();
         Component_Datepicker_lang.onload = function () {
             console.log('Component_Datepicker Load Completed.');
-            Component_Datepicker_Enable = true;
+            CoreSetting.Component_Datepicker_Enable = true;
             return LoadComponents();
         }
     }
-    else if (Component_Bootstrapselect_Enable == false && isLoadComponent_Bootstrapselect == true) {
+    else if (CoreSetting.Component_Bootstrapselect_Enable == false && isLoadComponent_Bootstrapselect == true) {
         LoadComponent_Bootstrapselect();
         Component_Bootstrapselect_lang.onload = function () {
             console.log('Component_Bootstrapselect Load Completed.');
-            Component_Bootstrapselect_Enable = true;
+            CoreSetting.Component_Bootstrapselect_Enable = true;
             return LoadComponents();
         }
     }
-    else if (Component_Vue_Enable == false && isLoadComponent_Vue == true) {
+    else if (CoreSetting.Component_Vue_Enable == false && isLoadComponent_Vue == true) {
         document.getElementById('Vue').style.display = 'none';
         LoadComponent_Vue();
         Component_Vue_js.onload = function () {
             console.log('Component_Vue Load Completed.');
-            Component_Vue_Enable = true;
+            CoreSetting.Component_Vue_Enable = true;
             SetVue_obj();
             document.getElementById('Vue').style.display = '';
             return LoadComponents();
         }
     }
-    else if (External_js_Enable == false && isLoadExternal_js == true && External_js_Path != '') {
+    else if (CoreSetting.External_js_Enable == false && isLoadExternal_js == true && External_js_Path != '') {
         LoadExternal_js();
         External_js.onload = function () {
             console.log('External_js Load Completed.');
-            External_js_Enable = true;
+            CoreSetting.External_js_Enable = true;
             return LoadComponents();
         }
     }
