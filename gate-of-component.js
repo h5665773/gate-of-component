@@ -1,5 +1,5 @@
 ﻿//Core Settings
-var CoreSetting = new Object({
+let CoreSetting = new Object({
     Component_Jquery_Enable: false,
     Component_Bootstrap_Enable: false,
     Component_Datepicker_Enable: false,
