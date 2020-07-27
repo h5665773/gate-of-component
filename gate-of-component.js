@@ -109,6 +109,7 @@ function test() {
             console.log('Component_Bootstrapselect Load Completed.');
             return LoadComponents_test(CoreSetting.Component_Vue_js, isLoadComponent_Vue);
         }).then(function () {
+            SetVue_obj();
             console.log('Component_Vue Load Completed.');
             return LoadComponents_test(CoreSetting.Component_External_js, isLoadComponent_External_js);
             console.log('Component_External_js Load Completed.');
@@ -252,6 +253,7 @@ function PadLeft(Target_str, Padding_str, TotalWidth_int) {
 }
 
 function SetVue_obj() {
+    document.getElementById('Vue').style.display = 'none';
     Vue_obj = new Vue({
         el: '#Vue',
         data: {
@@ -289,6 +291,7 @@ function SetVue_obj() {
             }
         }
     });
+    document.getElementById('Vue').style.display = '';
 }
 
 function Set_Datepicker(Type_str, Target_obj) {
