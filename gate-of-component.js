@@ -8,8 +8,8 @@ var CoreSetting = new Object({
     External_js_Enable: false
 });
 
-var test = 'test';
-let test2 = 'test2';
+var test = '1111';
+let test2 = '2222';
 
 var $goc;
 var Vue_obj;
