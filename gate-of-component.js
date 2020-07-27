@@ -18,7 +18,7 @@ let CoreSetting = new Object({
     Component_Vue_js: document.createElement('script'),
     Component_External_js: document.createElement('script'),
     Component_External_js_Path: '',
-    Component_Setting: function () {
+    Set_ComponentSetting: function () {
         CoreSetting.Component_Jquery_js.setAttribute('type', 'text/javascript');
         CoreSetting.Component_Jquery_js.setAttribute('src', 'https://h5665773.github.io/jquery-3.5.1-dist/jquery-3.5.1.min.js');
         CoreSetting.Component_Bootstrap_css.setAttribute('rel', 'stylesheet');
@@ -40,7 +40,7 @@ let CoreSetting = new Object({
         CoreSetting.Component_Vue_js.setAttribute('type', 'text/javascript');
         CoreSetting.Component_Vue_js.setAttribute('src', 'https://h5665773.github.io/Vue-2.6.11-dist/vue.min.js');
         CoreSetting.Component_External_js.setAttribute('type', 'text/javascript');
-        CoreSetting.Component_External_js.setAttribute('src', `${CoreSetting.Component_External_js_Path}.js?Update=${CoreSetting.GetToday}`);
+        CoreSetting.Component_External_js.setAttribute('src', `${CoreSetting.Component_External_js_Path}.js?Update=${CoreSetting.GetToday()}`);
     },
     GetToday: function () {
         let Date_obj = new Date();
@@ -48,10 +48,10 @@ let CoreSetting = new Object({
         return Today_str;
     }
 });
-
 let $goc;
 let Vue_obj;
-let Head_obj = document.getElementsByTagName('head')[0];
+
+CoreSetting.Set_ComponentSetting();
 
 //Client Settings
 var isLoadComponent_Jquery = true;
@@ -73,6 +73,7 @@ var InputData1_objs;
 //LoadComponents();
 
 //Components On/Off
+let Head_obj = document.getElementsByTagName('head')[0];
 function LoadComponents() {
     if (CoreSetting.Component_Jquery_Enable == false && isLoadComponent_Jquery == true) {
         LoadComponent_Jquery();
