@@ -79,7 +79,7 @@ function LoadComponents_test(Component_obj, isLoadComponent) {
                 resolve('success');
         };
         if (isLoadComponent) {
-            CoreSetting.ComponentSubordinatePoint_obj.appendChild(CoreSetting.Component_obj);
+            CoreSetting.Component_InstallationTarget_obj.appendChild(CoreSetting.Component_obj);
         }
     });
 }
@@ -182,7 +182,7 @@ function LoadComponents() {
 //isLoadComponent_External_js = true;
 
 function LoadComponent_Jquery() {
-    CoreSetting.ComponentSubordinatePoint_obj.appendChild(CoreSetting.Component_Jquery_js);
+    CoreSetting.Component_InstallationTarget_obj.appendChild(CoreSetting.Component_Jquery_js);
 }
 
 function LoadComponent_Bootstrap() {
