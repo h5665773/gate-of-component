@@ -18,7 +18,8 @@ let CoreSetting = new Object({
     Component_Vue_js: document.createElement('script'),
     Component_External_js: document.createElement('script'),
     Component_External_js_Path: '',
-    Set_ComponentSetting: function () {
+    Component_InstallationTarget_obj: document.getElementsByTagName('head')[0],
+    Component_SourceSetting: function () {
         CoreSetting.Component_Jquery_js.setAttribute('type', 'text/javascript');
         CoreSetting.Component_Jquery_js.setAttribute('src', 'https://h5665773.github.io/jquery-3.5.1-dist/jquery-3.5.1.min.js');
         CoreSetting.Component_Bootstrap_css.setAttribute('rel', 'stylesheet');
@@ -51,7 +52,7 @@ let CoreSetting = new Object({
 let $goc;
 let Vue_obj;
 
-CoreSetting.Set_ComponentSetting();
+CoreSetting.Component_SourceSetting();
 
 //Client Settings
 var isLoadComponent_Jquery = true;
@@ -72,8 +73,50 @@ var InputData1_objs;
 //MessageArea_obj = $j('#AlertScript');
 //LoadComponents();
 
+function LoadComponents_test(Component_obj, isLoadComponent) {
+    return new Promise(function (resolve, reject) {
+        Component_obj.onload = function () {
+                resolve('success');
+        };
+        if (isLoadComponent) {
+            CoreSetting.ComponentSubordinatePoint_obj.appendChild(CoreSetting.Component_obj);
+        }
+    });
+}
+function test() {
+    LoadComponents_test(Component_Jquery_js, isLoadComponent_Jquery)
+        .then(function () {
+            $goc = jQuery.noConflict(true);
+            console.log('Component_Jquery Load Completed.');
+            return LoadComponents_test(Component_Bootstrap_css, isLoadComponent_Bootstrap);
+        }).then(function () {
+            return LoadComponents_test(Component_Bootstrap_js, isLoadComponent_Bootstrap);
+        }).then(function () {
+            console.log('Component_Bootstrap Load Completed.');
+            return LoadComponents_test(Component_Datepicker_css, isLoadComponent_Datepicker);
+        }).then(function () {
+            return LoadComponents_test(Component_Datepicker_js, isLoadComponent_Datepicker);
+        }).then(function () {
+            return LoadComponents_test(Component_Datepicker_lang, isLoadComponent_Datepicker);
+        }).then(function () {
+            console.log('Component_Datepicker Load Completed.');
+            return LoadComponents_test(Component_Bootstrapselect_css, isLoadComponent_Bootstrapselect);
+        }).then(function () {
+            return LoadComponents_test(Component_Bootstrapselect_js, isLoadComponent_Bootstrapselect);
+        }).then(function () {
+            return LoadComponents_test(Component_Bootstrapselect_lang, isLoadComponent_Bootstrapselect);
+        }).then(function () {
+            console.log('Component_Bootstrapselect Load Completed.');
+            return LoadComponents_test(Component_Vue_js, isLoadComponent_Vue);
+        }).then(function () {
+            console.log('Component_Vue Load Completed.');
+            return LoadComponents_test(Component_External_js, isLoadComponent_External_js);
+            console.log('Component_External_js Load Completed.');
+        });
+}
+
+
 //Components On/Off
-let Head_obj = document.getElementsByTagName('head')[0];
 function LoadComponents() {
     if (CoreSetting.Component_Jquery_Enable == false && isLoadComponent_Jquery == true) {
         LoadComponent_Jquery();
@@ -139,44 +182,44 @@ function LoadComponents() {
 //isLoadComponent_External_js = true;
 
 function LoadComponent_Jquery() {
-    Head_obj.appendChild(CoreSetting.Component_Jquery_js);
+    CoreSetting.ComponentSubordinatePoint_obj.appendChild(CoreSetting.Component_Jquery_js);
 }
 
 function LoadComponent_Bootstrap() {
-    Head_obj.appendChild(CoreSetting.Component_Bootstrap_css);
+    CoreSetting.Component_InstallationTarget_obj.appendChild(CoreSetting.Component_Bootstrap_css);
     CoreSetting.Component_Bootstrap_css.onload = function () {
-        Head_obj.appendChild(CoreSetting.Component_Bootstrap_js);
+        CoreSetting.Component_InstallationTarget_obj.appendChild(CoreSetting.Component_Bootstrap_js);
     }
 }
 
 function LoadComponent_Datepicker() {
-    Head_obj.appendChild(CoreSetting.Component_Datepicker_css);
+    CoreSetting.Component_InstallationTarget_obj.appendChild(CoreSetting.Component_Datepicker_css);
     CoreSetting.Component_Datepicker_css.onload = function () {
-        Head_obj.appendChild(CoreSetting.Component_Datepicker_js);
+        CoreSetting.Component_InstallationTarget_obj.appendChild(CoreSetting.Component_Datepicker_js);
     }
     CoreSetting.Component_Datepicker_js.onload = function () {
-        Head_obj.appendChild(CoreSetting.Component_Datepicker_lang);
+        CoreSetting.Component_InstallationTarget_obj.appendChild(CoreSetting.Component_Datepicker_lang);
     }
 }
 
 function LoadComponent_Bootstrapselect() {
-    Head_obj.appendChild(CoreSetting.Component_Bootstrapselect_css);
+    CoreSetting.Component_InstallationTarget_obj.appendChild(CoreSetting.Component_Bootstrapselect_css);
     CoreSetting.Component_Bootstrapselect_css.onload = function () {
 
-        Head_obj.appendChild(CoreSetting.Component_Bootstrapselect_js);
+        CoreSetting.Component_InstallationTarget_obj.appendChild(CoreSetting.Component_Bootstrapselect_js);
     }
     CoreSetting.Component_Bootstrapselect_js.onload = function () {
 
-        Head_obj.appendChild(CoreSetting.Component_Bootstrapselect_lang);
+        CoreSetting.Component_InstallationTarget_obj.appendChild(CoreSetting.Component_Bootstrapselect_lang);
     }
 }
 
 function LoadComponent_Vue() {
-    Head_obj.appendChild(CoreSetting.Component_Vue_js);
+    CoreSetting.Component_InstallationTarget_obj.appendChild(CoreSetting.Component_Vue_js);
 }
 
 function LoadComponent_External_js() {
-    Head_obj.appendChild(CoreSetting.Component_External_js);
+    CoreSetting.Component_InstallationTarget_obj.appendChild(CoreSetting.Component_External_js);
 }
 
 function AlertMessage(Type_str, Massage_str) {
