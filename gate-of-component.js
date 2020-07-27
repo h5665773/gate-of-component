@@ -68,7 +68,7 @@ var AjaxUrl_str = 'XMLFORM/AjaxOrder.aspx';
 var InputDataGroup1_class = '.inputdata-1';
 var InputData1_objs;
 //ex:
-//Component_External_js_Path = 'scriptself/PA1601';
+//CoreSetting.Component_External_js_Path = 'scriptself/PA1601';
 //MessageArea_obj = $j('#AlertScript');
 //LoadComponents();
 
@@ -121,7 +121,7 @@ function LoadComponents() {
             return LoadComponents();
         }
     }
-    else if (CoreSetting.Component_External_js_Enable == false && isLoadComponent_External_js == true && Component_External_js_Path != '') {
+    else if (CoreSetting.Component_External_js_Enable == false && isLoadComponent_External_js == true && CoreSetting.Component_External_js_Path != '') {
         LoadComponent_External_js();
         CoreSetting.Component_External_js.onload = function () {
             console.log('Component_External_js Load Completed.');
