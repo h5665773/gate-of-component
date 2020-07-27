@@ -52,8 +52,6 @@ let CoreSetting = new Object({
 let $goc;
 let Vue_obj;
 
-CoreSetting.Component_SourceSetting();
-
 //Client Settings
 var isLoadComponent_Jquery = true;
 var isLoadComponent_Bootstrap = true;
@@ -84,6 +82,8 @@ function LoadComponents_test(Component_obj, isLoadComponent) {
     });
 }
 function test() {
+    CoreSetting.Component_SourceSetting();
+
     LoadComponents_test(CoreSetting.Component_Jquery_js, isLoadComponent_Jquery)
         .then(function () {
             $goc = jQuery.noConflict(true);
