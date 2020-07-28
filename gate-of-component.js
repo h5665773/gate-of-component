@@ -1,230 +1,195 @@
-﻿//Core Settings
-let CoreSetting = new Object({
-    Component_Jquery_Enable: false,
-    Component_Bootstrap_Enable: false,
-    Component_Datepicker_Enable: false,
-    Component_Bootstrapselect_Enable: false,
-    Component_Vue_Enable: false,
-    Component_External_js_Enable: false,
-    Component_Jquery_js: document.createElement('script'),
-    Component_Bootstrap_css: document.createElement('link'),
-    Component_Bootstrap_js: document.createElement('script'),
-    Component_Datepicker_css: document.createElement('link'),
-    Component_Datepicker_js: document.createElement('script'),
-    Component_Datepicker_lang: document.createElement('script'),
-    Component_Bootstrapselect_css: document.createElement('link'),
-    Component_Bootstrapselect_js: document.createElement('script'),
-    Component_Bootstrapselect_lang: document.createElement('script'),
-    Component_Vue_js: document.createElement('script'),
-    Component_External_js: document.createElement('script'),
-    Component_External_js_Path: '',
-    Component_InstallationTarget_obj: document.getElementsByTagName('head')[0],
-    Set_Component_SourceSetting: function () {
-        CoreSetting.Component_Jquery_js.setAttribute('type', 'text/javascript');
-        CoreSetting.Component_Jquery_js.setAttribute('src', 'https://h5665773.github.io/jquery-3.5.1-dist/jquery-3.5.1.min.js');
-        CoreSetting.Component_Bootstrap_css.setAttribute('rel', 'stylesheet');
-        CoreSetting.Component_Bootstrap_css.setAttribute('href', 'https://h5665773.github.io/bootstrap-4.5.0-dist/css/bootstrap.min.css');
-        CoreSetting.Component_Bootstrap_js.setAttribute('type', 'text/javascript');
-        CoreSetting.Component_Bootstrap_js.setAttribute('src', 'https://h5665773.github.io/bootstrap-4.5.0-dist/js/bootstrap.bundle.min.js');
-        CoreSetting.Component_Datepicker_css.setAttribute('rel', 'stylesheet');
-        CoreSetting.Component_Datepicker_css.setAttribute('href', 'https://h5665773.github.io/bootstrap-datepicker-1.9.0-dist/css/bootstrap-datepicker.min.css');
-        CoreSetting.Component_Datepicker_js.setAttribute('type', 'text/javascript');
-        CoreSetting.Component_Datepicker_js.setAttribute('src', 'https://h5665773.github.io/bootstrap-datepicker-1.9.0-dist/js/bootstrap-datepicker.min.js');
-        CoreSetting.Component_Datepicker_lang.setAttribute('type', 'text/javascript');
-        CoreSetting.Component_Datepicker_lang.setAttribute('src', 'https://h5665773.github.io/bootstrap-datepicker-1.9.0-dist/locales/bootstrap-datepicker.zh-TW.min.js');
-        CoreSetting.Component_Bootstrapselect_css.setAttribute('rel', 'stylesheet');
-        CoreSetting.Component_Bootstrapselect_css.setAttribute('href', 'https://h5665773.github.io/bootstrap-select-1.13.14-dist/css/bootstrap-select.min.css');
-        CoreSetting.Component_Bootstrapselect_js.setAttribute('type', 'text/javascript');
-        CoreSetting.Component_Bootstrapselect_js.setAttribute('src', 'https://h5665773.github.io/bootstrap-select-1.13.14-dist/js/bootstrap-select.min.js');
-        CoreSetting.Component_Bootstrapselect_lang.setAttribute('type', 'text/javascript');
-        CoreSetting.Component_Bootstrapselect_lang.setAttribute('src', 'https://h5665773.github.io/bootstrap-select-1.13.14-dist/js/i18n/defaults-zh_TW.min.js');
-        CoreSetting.Component_Vue_js.setAttribute('type', 'text/javascript');
-        CoreSetting.Component_Vue_js.setAttribute('src', 'https://h5665773.github.io/Vue-2.6.11-dist/vue.min.js');
-        CoreSetting.Component_External_js.setAttribute('type', 'text/javascript');
-        CoreSetting.Component_External_js.setAttribute('src', `${CoreSetting.Component_External_js_Path}.js?Update=${CoreSetting.Get_Today()}`);
-    },
-    Get_Today: function () {
-        let Date_obj = new Date();
-        let Today_str = Date_obj.getFullYear().toString() + PadLeft((Date_obj.getMonth() + 1).toString(), '0', 2) + PadLeft(Date_obj.getDate().toString(), '0', 2);
-        return Today_str;
+﻿let $goc = null;
+let Vue_obj = null;
+let Component_Jquery = new Object({
+    Enable: true,
+    js: document.createElement('script'),
+    js_name: 'Component_Jquery_js',
+    Set_SourceSetting: function () {
+        Component_Jquery.js.setAttribute('type', 'text/javascript');
+        Component_Jquery.js.setAttribute('src', 'https://h5665773.github.io/jquery-3.5.1-dist/jquery-3.5.1.min.js');
     }
 });
-let $goc;
-let Vue_obj;
+let Component_Bootstrap = new Object({
+    Enable: true,
+    js: document.createElement('script'),
+    js_name: 'Component_Bootstrap_js',
+    css: document.createElement('link'),
+    css_name:'Component_Bootstrap_css',
+    Set_SourceSetting: function () {
+        Component_Bootstrap.css.setAttribute('rel', 'stylesheet');
+        Component_Bootstrap.css.setAttribute('href', 'https://h5665773.github.io/bootstrap-4.5.0-dist/css/bootstrap.min.css');
+        Component_Bootstrap.js.setAttribute('type', 'text/javascript');
+        Component_Bootstrap.js.setAttribute('src', 'https://h5665773.github.io/bootstrap-4.5.0-dist/js/bootstrap.bundle.min.js');
+    }
+});
+let Component_Datepicker = new Object({
+    Enable: true,
+    js: document.createElement('script'),
+    js_name: 'Component_Datepicker_js',
+    css: document.createElement('link'),
+    css_name: 'Component_Datepicker_css',
+    lang: document.createElement('script'),
+    lang_name:'Component_Datepicker_lang',
+    Set_SourceSetting: function () {
+        Component_Datepicker.css.setAttribute('rel', 'stylesheet');
+        Component_Datepicker.css.setAttribute('href', 'https://h5665773.github.io/bootstrap-datepicker-1.9.0-dist/css/bootstrap-datepicker.min.css');
+        Component_Datepicker.js.setAttribute('type', 'text/javascript');
+        Component_Datepicker.js.setAttribute('src', 'https://h5665773.github.io/bootstrap-datepicker-1.9.0-dist/js/bootstrap-datepicker.min.js');
+        Component_Datepicker.lang.setAttribute('type', 'text/javascript');
+        Component_Datepicker.lang.setAttribute('src', 'https://h5665773.github.io/bootstrap-datepicker-1.9.0-dist/locales/bootstrap-datepicker.zh-TW.min.js');
+    }
+});
+let Component_Bootstrapselect = new Object({
+    Enable: true,
+    js: document.createElement('script'),
+    js_name: 'Component_Bootstrapselect_js',
+    css: document.createElement('link'),
+    css_name: 'Component_Bootstrapselect_css',
+    lang: document.createElement('script'),
+    lang_name: 'Component_Bootstrapselect_lang',
+    Set_SourceSetting: function () {
+        Component_Bootstrapselect.css.setAttribute('rel', 'stylesheet');
+        Component_Bootstrapselect.css.setAttribute('href', 'https://h5665773.github.io/bootstrap-select-1.13.14-dist/css/bootstrap-select.min.css');
+        Component_Bootstrapselect.js.setAttribute('type', 'text/javascript');
+        Component_Bootstrapselect.js.setAttribute('src', 'https://h5665773.github.io/bootstrap-select-1.13.14-dist/js/bootstrap-select.min.js');
+        Component_Bootstrapselect.lang.setAttribute('type', 'text/javascript');
+        Component_Bootstrapselect.lang.setAttribute('src', 'https://h5665773.github.io/bootstrap-select-1.13.14-dist/js/i18n/defaults-zh_TW.min.js');
+    }
+});
+let Component_Vue = new Object({
+    Enable: true,
+    js: document.createElement('script'),
+    js_name: 'Component_Vue_js',
+    Set_SourceSetting: function () {
+        Component_Vue.js.setAttribute('type', 'text/javascript');
+        Component_Vue.js.setAttribute('src', 'https://h5665773.github.io/Vue-2.6.11-dist/vue.min.js');
+    }
+});
+let Component_External = new Object({
+    Enable: true,
+    js: document.createElement('script'),
+    js_name: 'Component_Vue_js',
+    js_path:'Your_External_js_Path',
+    Set_SourceSetting: function () {
+        Component_External.js.setAttribute('type', 'text/javascript');
+        Component_External.js.setAttribute('src', `${Component_External.js_path}.js?Update=${Get_Today()}`);
+    }
+});
+let Setting = new Object({
+    Component_InstallationTarget_obj: document.getElementsByTagName('head')[0],
+    Set_Component_SourceSetting: function () {
+        Component_Jquery.Set_SourceSetting();
+        Component_Bootstrap.Set_SourceSetting();
+        Component_Datepicker.Set_SourceSetting();
+        Component_Bootstrapselect.Set_SourceSetting();
+        Component_Vue.Set_SourceSetting();
+        Component_External.Set_SourceSetting();
+    },
+    LoadComponent: function (Component_obj, Component_Enable, ComponentName_str) {
+        return new Promise(function (resolve, reject) {
+            if (Component_Enable) {
+                Setting.Component_InstallationTarget_obj.appendChild(Component_obj);
+            }
+            else {
+                resolve('continue');
+            }
+
+            Component_obj.onload = function () {
+                console.log(`${ComponentName_str} Load Completed.`);
+                resolve('success');
+            };
+        });
+    },
+    Set_Vue_obj: function () {
+        if (Vue_obj != null) {
+            document.getElementById('Vue').style.display = 'none';
+            Vue_obj = new Vue({
+                el: '#Vue',
+                data: {
+                    ComList: {},
+                    CuList_Source: {},
+                    CuList: {},
+                    DaysByMonth: {},
+                    SentinelList: {},
+                    SentinelMember: {},
+                    MemberSchedule: {},
+                    MemberScheduleDetail_Source: {},
+                    MemberScheduleDetail: {}
+                },
+                updated() {
+                    this.$nextTick(function () {
+                        if (Selectpicker_obj != undefined) {
+                            Selectpicker_obj.selectpicker('refresh');
+                        }
+                    });
+                },
+                methods: {
+                    Cu_Filter: function (F_COM_ID_str) {
+                        Vue_obj.CuList = Vue_obj.CuList_Source.filter(data => { return data.F_COM_ID.match(F_COM_ID_str); });
+                    },
+                    QuerySchedule: function (F_CU_ID_str, F_YM_str) {
+                        ClearMessage();
+                        if (InputCheck() == false) {
+                            return;
+                        }
+                        Set_LastDayOfMonth(F_YM_str);
+                        Get_SentinelSchedule(F_CU_ID_str, F_YM_str, Vue_obj.DaysByMonth.length);
+                    },
+                    Show_Modal: function (F_CLASS_str, F_DAY_str, F_POINT_NAME_str, F_EMP_ID_str, F_EMP_NAME_str, ModalLabel_obj, F_CLASS_obj, F_DATE_obj, F_DATE_str) {
+                        Show_Modal(F_CLASS_str, F_DAY_str, F_POINT_NAME_str, F_EMP_ID_str, F_EMP_NAME_str, ModalLabel_obj, F_CLASS_obj, F_DATE_obj, F_DATE_str);
+                    }
+                }
+            });
+            document.getElementById('Vue').style.display = '';
+        }
+    }
+});
 
 //Client Settings
-var isLoadComponent_Jquery = true;
-var isLoadComponent_Bootstrap = true;
-var isLoadComponent_Datepicker = true;
-var isLoadComponent_Bootstrapselect = true;
-var isLoadComponent_Vue = true;
-var isLoadComponent_External_js = true;
-
-var MessageArea_obj;
-var Selectpicker_obj;
-var Datepicker_obj;
-var AjaxUrl_str = 'XMLFORM/AjaxOrder.aspx';
-var InputDataGroup1_class = '.inputdata-1';
-var InputData1_objs;
+let MessageArea_obj;
+let Selectpicker_obj;
+let Datepicker_obj;
+let AjaxUrl_str = 'XMLFORM/AjaxOrder.aspx';
+let InputDataGroup1_class = '.inputdata-1';
+let InputData1_objs;
 //ex:
-//CoreSetting.Component_External_js_Path = 'scriptself/PA1601';
 //MessageArea_obj = $j('#AlertScript');
 //LoadComponents();
 
-function LoadComponents_test(Component_obj, isLoadComponent, ComponentName_str) {
-    return new Promise(function (resolve, reject) {
-        if (isLoadComponent) {
-            CoreSetting.Component_InstallationTarget_obj.appendChild(Component_obj);
-        }
-        else {
-            resolve('continue');
-        }
-
-        Component_obj.onload = function () {
-            console.log(`${ComponentName_str} Load Completed.`);
-                resolve('success');
-        };
-    });
+function Set_External_js_path(Path_str) {
+    Component_External.js_path = Path_str;
 }
-function test() {
-    CoreSetting.Set_Component_SourceSetting();
 
-    LoadComponents_test(CoreSetting.Component_Jquery_js, isLoadComponent_Jquery,'Component_Jquery_js')
+function LoadComponents() {
+    Setting.Set_Component_SourceSetting();
+    Setting.LoadComponent(Component_Jquery.js, Component_Jquery.Enable, Component_Jquery.js_name)
         .then(function (msg) {
             if (msg == 'success') {
                 $goc = jQuery.noConflict(true);
             }
-            return LoadComponents_test(CoreSetting.Component_Bootstrap_css, isLoadComponent_Bootstrap,'Component_Bootstrap_css');
+            return Setting.LoadComponent(Component_Bootstrap.css, Component_Bootstrap.Enable, Component_Bootstrap.css_name);
         }).then(function (msg) {
-            return LoadComponents_test(CoreSetting.Component_Bootstrap_js, isLoadComponent_Bootstrap,'Component_Bootstrap_js');
+            return Setting.LoadComponent(Component_Bootstrap.js, Component_Bootstrap.Enable,Component_Bootstrap.js_name);
         }).then(function (msg) {
-            return LoadComponents_test(CoreSetting.Component_Datepicker_css, isLoadComponent_Datepicker,'Component_Datepicker_css');
+            return Setting.LoadComponent(Component_Datepicker.css, Component_Datepicker.Enable,Component_Datepicker.css_name);
+        }).then(function (msg) {                             
+            return Setting.LoadComponent(Component_Datepicker.js, Component_Datepicker.Enable, Component_Datepicker.js_name);
+        }).then(function (msg) {                             
+            return Setting.LoadComponent(Component_Datepicker.lang, Component_Datepicker.Enable, Component_Datepicker.lang_name);
         }).then(function (msg) {
-            return LoadComponents_test(CoreSetting.Component_Datepicker_js, isLoadComponent_Datepicker, 'Component_Datepicker_js');
+            return Setting.LoadComponent(Component_Bootstrapselect.css, Component_Bootstrapselect.Enable, Component_Bootstrapselect.css_name);
         }).then(function (msg) {
-            return LoadComponents_test(CoreSetting.Component_Datepicker_lang, isLoadComponent_Datepicker, 'Component_Datepicker_lang');
+            return Setting.LoadComponent(Component_Bootstrapselect.js, Component_Bootstrapselect.Enable, Component_Bootstrapselect.js_name);
         }).then(function (msg) {
-            return LoadComponents_test(CoreSetting.Component_Bootstrapselect_css, isLoadComponent_Bootstrapselect, 'Component_Bootstrapselect_css');
+            return Setting.LoadComponent(Component_Bootstrapselect.lang, Component_Bootstrapselect.Enable, Component_Bootstrapselect.lang_name);
         }).then(function (msg) {
-            return LoadComponents_test(CoreSetting.Component_Bootstrapselect_js, isLoadComponent_Bootstrapselect, 'Component_Bootstrapselect_js');
+            return Setting.LoadComponent(Component_Vue.js, Component_Vue.Enable, Component_Vue.js_name);
         }).then(function (msg) {
-            return LoadComponents_test(CoreSetting.Component_Bootstrapselect_lang, isLoadComponent_Bootstrapselect, 'Component_Bootstrapselect_lang');
-        }).then(function (msg) {
-            return LoadComponents_test(CoreSetting.Component_Vue_js, isLoadComponent_Vue, 'Component_Vue_js');
-        }).then(function (msg) {
-            console.log(msg);
             if (msg == 'success') {
-                SetVue_obj();
+                Setting.Set_Vue_obj();
             }
-            return LoadComponents_test(CoreSetting.Component_External_js, isLoadComponent_External_js, 'Component_External_js');
+            return Setting.LoadComponent(Component_External.js, Component_External.Enable, Component_External.js_name);
         });
-}
-
-
-//Components On/Off
-function LoadComponents() {
-    if (CoreSetting.Component_Jquery_Enable == false && isLoadComponent_Jquery == true) {
-        LoadComponent_Jquery();
-        CoreSetting.Component_Jquery_js.onload = function () {
-
-            $goc = jQuery.noConflict(true);
-
-            console.log('Component_Jquery Load Completed.');
-            CoreSetting.Component_Jquery_Enable = true;
-            return LoadComponents();
-        }
-    }
-    else if (CoreSetting.Component_Bootstrap_Enable == false && isLoadComponent_Bootstrap == true) {
-        LoadComponent_Bootstrap();
-        CoreSetting.Component_Bootstrap_js.onload = function () {
-            console.log('Component_Bootstrap Load Completed.');
-            CoreSetting.Component_Bootstrap_Enable = true;
-            return LoadComponents();
-        }
-    }
-    else if (CoreSetting.Component_Datepicker_Enable == false && isLoadComponent_Datepicker == true) {
-        LoadComponent_Datepicker();
-        CoreSetting.Component_Datepicker_lang.onload = function () {
-            console.log('Component_Datepicker Load Completed.');
-            CoreSetting.Component_Datepicker_Enable = true;
-            return LoadComponents();
-        }
-    }
-    else if (CoreSetting.Component_Bootstrapselect_Enable == false && isLoadComponent_Bootstrapselect == true) {
-        LoadComponent_Bootstrapselect();
-        CoreSetting.Component_Bootstrapselect_lang.onload = function () {
-            console.log('Component_Bootstrapselect Load Completed.');
-            CoreSetting.Component_Bootstrapselect_Enable = true;
-            return LoadComponents();
-        }
-    }
-    else if (CoreSetting.Component_Vue_Enable == false && isLoadComponent_Vue == true) {
-        document.getElementById('Vue').style.display = 'none';
-        LoadComponent_Vue();
-        CoreSetting.Component_Vue_js.onload = function () {
-            console.log('Component_Vue Load Completed.');
-            CoreSetting.Component_Vue_Enable = true;
-            SetVue_obj();
-            document.getElementById('Vue').style.display = '';
-            return LoadComponents();
-        }
-    }
-    else if (CoreSetting.Component_External_js_Enable == false && isLoadComponent_External_js == true && CoreSetting.Component_External_js_Path != '') {
-        LoadComponent_External_js();
-        CoreSetting.Component_External_js.onload = function () {
-            console.log('Component_External_js Load Completed.');
-            CoreSetting.Component_External_js_Enable = true;
-            return LoadComponents();
-        }
-    }
-}
-//ex:
-//isLoadComponent_Jquery = true;
-//isLoadComponent_Bootstrap = true;
-//isLoadComponent_Datepicker = true;
-//isLoadComponent_Bootstrapselect = true;
-//isLoadComponent_Vue = true;
-//isLoadComponent_External_js = true;
-
-function LoadComponent_Jquery() {
-    CoreSetting.Component_InstallationTarget_obj.appendChild(CoreSetting.Component_Jquery_js);
-}
-
-function LoadComponent_Bootstrap() {
-    CoreSetting.Component_InstallationTarget_obj.appendChild(CoreSetting.Component_Bootstrap_css);
-    CoreSetting.Component_Bootstrap_css.onload = function () {
-        CoreSetting.Component_InstallationTarget_obj.appendChild(CoreSetting.Component_Bootstrap_js);
-    }
-}
-
-function LoadComponent_Datepicker() {
-    CoreSetting.Component_InstallationTarget_obj.appendChild(CoreSetting.Component_Datepicker_css);
-    CoreSetting.Component_Datepicker_css.onload = function () {
-        CoreSetting.Component_InstallationTarget_obj.appendChild(CoreSetting.Component_Datepicker_js);
-    }
-    CoreSetting.Component_Datepicker_js.onload = function () {
-        CoreSetting.Component_InstallationTarget_obj.appendChild(CoreSetting.Component_Datepicker_lang);
-    }
-}
-
-function LoadComponent_Bootstrapselect() {
-    CoreSetting.Component_InstallationTarget_obj.appendChild(CoreSetting.Component_Bootstrapselect_css);
-    CoreSetting.Component_Bootstrapselect_css.onload = function () {
-
-        CoreSetting.Component_InstallationTarget_obj.appendChild(CoreSetting.Component_Bootstrapselect_js);
-    }
-    CoreSetting.Component_Bootstrapselect_js.onload = function () {
-
-        CoreSetting.Component_InstallationTarget_obj.appendChild(CoreSetting.Component_Bootstrapselect_lang);
-    }
-}
-
-function LoadComponent_Vue() {
-    CoreSetting.Component_InstallationTarget_obj.appendChild(CoreSetting.Component_Vue_js);
-}
-
-function LoadComponent_External_js() {
-    CoreSetting.Component_InstallationTarget_obj.appendChild(CoreSetting.Component_External_js);
 }
 
 function AlertMessage(Type_str, Massage_str) {
@@ -254,48 +219,6 @@ function PadLeft(Target_str, Padding_str, TotalWidth_int) {
     }
 
     return Target_str;
-}
-
-function SetVue_obj() {
-    document.getElementById('Vue').style.display = 'none';
-    Vue_obj = new Vue({
-        el: '#Vue',
-        data: {
-            ComList: {},
-            CuList_Source: {},
-            CuList: {},
-            DaysByMonth: {},
-            SentinelList: {},
-            SentinelMember: {},
-            MemberSchedule: {},
-            MemberScheduleDetail_Source: {},
-            MemberScheduleDetail: {}
-        },
-        updated() {
-            this.$nextTick(function () {
-                if (Selectpicker_obj != undefined) {
-                    Selectpicker_obj.selectpicker('refresh');
-                }
-            });
-        },
-        methods: {
-            Cu_Filter: function (F_COM_ID_str) {
-                Vue_obj.CuList = Vue_obj.CuList_Source.filter(data => { return data.F_COM_ID.match(F_COM_ID_str); });
-            },
-            QuerySchedule: function (F_CU_ID_str, F_YM_str) {
-                ClearMessage();
-                if (InputCheck() == false) {
-                    return;
-                }
-                Set_LastDayOfMonth(F_YM_str);
-                Get_SentinelSchedule(F_CU_ID_str, F_YM_str, Vue_obj.DaysByMonth.length);
-            },
-            Show_Modal: function (F_CLASS_str, F_DAY_str, F_POINT_NAME_str, F_EMP_ID_str, F_EMP_NAME_str, ModalLabel_obj, F_CLASS_obj, F_DATE_obj, F_DATE_str) {
-                Show_Modal(F_CLASS_str, F_DAY_str, F_POINT_NAME_str, F_EMP_ID_str, F_EMP_NAME_str, ModalLabel_obj, F_CLASS_obj, F_DATE_obj, F_DATE_str);
-            }
-        }
-    });
-    document.getElementById('Vue').style.display = '';
 }
 
 function Set_Datepicker(Type_str, Target_obj) {
@@ -419,4 +342,11 @@ function Show_Modal(F_CLASS_str, F_DAY_str, F_POINT_NAME_str, F_EMP_ID_str, F_EM
     F_DATE_obj.html(F_DATE_str);
     Vue_obj.MemberScheduleDetail = Vue_obj.MemberScheduleDetail_Source.filter(data => { return data.F_DAY.match(F_DAY_str); });
     Vue_obj.MemberScheduleDetail = Vue_obj.MemberScheduleDetail.filter(data => { return data.F_EMP_ID.match(F_EMP_ID_str); });
+}
+
+function Get_Today() {
+    //yyyymmdd
+    let Date_obj = new Date();
+    let Today_str = Date_obj.getFullYear().toString() + PadLeft((Date_obj.getMonth() + 1).toString(), '0', 2) + PadLeft(Date_obj.getDate().toString(), '0', 2);
+    return Today_str;
 }
