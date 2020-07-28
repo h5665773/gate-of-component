@@ -314,7 +314,7 @@ function Set_CuData(F_COM_ID_str) {
 }
 
 function InputCheck() {
-    let InputData_objs = $goc(`select${InputCheck_class},input${InputCheck_class}[type!="search"]`);
+    let InputData_objs = $goc(`select${Setting.InputCheck_class},input${Setting.InputCheck_class}[type!="search"]`);
 
     if (InputData_objs.length > 0) {
         for (let i = 0; i < InputData_objs.length; i++) {
