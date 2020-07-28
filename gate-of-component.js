@@ -73,12 +73,16 @@ var InputData1_objs;
 
 function LoadComponents_test(Component_obj, isLoadComponent) {
     return new Promise(function (resolve, reject) {
-        Component_obj.onload = function () {
-                resolve('success');
-        };
         if (isLoadComponent) {
             CoreSetting.Component_InstallationTarget_obj.appendChild(Component_obj);
         }
+        else {
+            resolve('success');
+        }
+
+        Component_obj.onload = function () {
+                resolve('success');
+        };
     });
 }
 function test() {
