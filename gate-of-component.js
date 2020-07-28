@@ -49,8 +49,8 @@ let CoreSetting = new Object({
         return Today_str;
     }
 });
-var $goc;
-var Vue_obj;
+let $goc;
+let Vue_obj;
 
 //Client Settings
 var isLoadComponent_Jquery = true;
@@ -77,7 +77,7 @@ function LoadComponents_test(Component_obj, isLoadComponent, ComponentName_str) 
             CoreSetting.Component_InstallationTarget_obj.appendChild(Component_obj);
         }
         else {
-            resolve('success');
+            resolve('continue');
         }
 
         Component_obj.onload = function () {
@@ -90,27 +90,32 @@ function test() {
     CoreSetting.Component_SourceSetting();
 
     LoadComponents_test(CoreSetting.Component_Jquery_js, isLoadComponent_Jquery,'Component_Jquery_js')
-        .then(function () {
-            $goc = jQuery.noConflict(true);
+        .then(function (msg) {
+            if (msg == 'success') {
+                $goc = jQuery.noConflict(true);
+            }
             return LoadComponents_test(CoreSetting.Component_Bootstrap_css, isLoadComponent_Bootstrap,'Component_Bootstrap_css');
-        }).then(function () {
+        }).then(function (msg) {
             return LoadComponents_test(CoreSetting.Component_Bootstrap_js, isLoadComponent_Bootstrap,'Component_Bootstrap_js');
-        }).then(function () {
+        }).then(function (msg) {
             return LoadComponents_test(CoreSetting.Component_Datepicker_css, isLoadComponent_Datepicker,'Component_Datepicker_css');
-        }).then(function () {
+        }).then(function (msg) {
             return LoadComponents_test(CoreSetting.Component_Datepicker_js, isLoadComponent_Datepicker, 'Component_Datepicker_js');
-        }).then(function () {
+        }).then(function (msg) {
             return LoadComponents_test(CoreSetting.Component_Datepicker_lang, isLoadComponent_Datepicker, 'Component_Datepicker_lang');
-        }).then(function () {
+        }).then(function (msg) {
             return LoadComponents_test(CoreSetting.Component_Bootstrapselect_css, isLoadComponent_Bootstrapselect, 'Component_Bootstrapselect_css');
-        }).then(function () {
+        }).then(function (msg) {
             return LoadComponents_test(CoreSetting.Component_Bootstrapselect_js, isLoadComponent_Bootstrapselect, 'Component_Bootstrapselect_js');
-        }).then(function () {
+        }).then(function (msg) {
             return LoadComponents_test(CoreSetting.Component_Bootstrapselect_lang, isLoadComponent_Bootstrapselect, 'Component_Bootstrapselect_lang');
-        }).then(function () {
+        }).then(function (msg) {
             return LoadComponents_test(CoreSetting.Component_Vue_js, isLoadComponent_Vue, 'Component_Vue_js');
-        }).then(function () {
-            SetVue_obj();
+        }).then(function (msg) {
+            console.log(msg);
+            if (msg == 'success') {
+                SetVue_obj();
+            }
             return LoadComponents_test(CoreSetting.Component_External_js, isLoadComponent_External_js, 'Component_External_js');
         });
 }
