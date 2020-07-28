@@ -71,7 +71,7 @@ var InputData1_objs;
 //MessageArea_obj = $j('#AlertScript');
 //LoadComponents();
 
-function LoadComponents_test(Component_obj, isLoadComponent) {
+function LoadComponents_test(Component_obj, isLoadComponent, ComponentName_str) {
     return new Promise(function (resolve, reject) {
         if (isLoadComponent) {
             CoreSetting.Component_InstallationTarget_obj.appendChild(Component_obj);
@@ -81,6 +81,7 @@ function LoadComponents_test(Component_obj, isLoadComponent) {
         }
 
         Component_obj.onload = function () {
+            console.log(`${ComponentName_str} Load Completed.`);
                 resolve('success');
         };
     });
@@ -88,35 +89,29 @@ function LoadComponents_test(Component_obj, isLoadComponent) {
 function test() {
     CoreSetting.Component_SourceSetting();
 
-    LoadComponents_test(CoreSetting.Component_Jquery_js, isLoadComponent_Jquery)
+    LoadComponents_test(CoreSetting.Component_Jquery_js, isLoadComponent_Jquery,'Component_Jquery_js')
         .then(function () {
             $goc = jQuery.noConflict(true);
-            console.log('Component_Jquery Load Completed.');
-            return LoadComponents_test(CoreSetting.Component_Bootstrap_css, isLoadComponent_Bootstrap);
+            return LoadComponents_test(CoreSetting.Component_Bootstrap_css, isLoadComponent_Bootstrap,'Component_Bootstrap_css');
         }).then(function () {
-            return LoadComponents_test(CoreSetting.Component_Bootstrap_js, isLoadComponent_Bootstrap);
+            return LoadComponents_test(CoreSetting.Component_Bootstrap_js, isLoadComponent_Bootstrap,'Component_Bootstrap_js');
         }).then(function () {
-            console.log('Component_Bootstrap Load Completed.');
-            return LoadComponents_test(CoreSetting.Component_Datepicker_css, isLoadComponent_Datepicker);
+            return LoadComponents_test(CoreSetting.Component_Datepicker_css, isLoadComponent_Datepicker,'Component_Datepicker_css');
         }).then(function () {
-            return LoadComponents_test(CoreSetting.Component_Datepicker_js, isLoadComponent_Datepicker);
+            return LoadComponents_test(CoreSetting.Component_Datepicker_js, isLoadComponent_Datepicker, 'Component_Datepicker_js');
         }).then(function () {
-            return LoadComponents_test(CoreSetting.Component_Datepicker_lang, isLoadComponent_Datepicker);
+            return LoadComponents_test(CoreSetting.Component_Datepicker_lang, isLoadComponent_Datepicker, 'Component_Datepicker_lang');
         }).then(function () {
-            console.log('Component_Datepicker Load Completed.');
-            return LoadComponents_test(CoreSetting.Component_Bootstrapselect_css, isLoadComponent_Bootstrapselect);
+            return LoadComponents_test(CoreSetting.Component_Bootstrapselect_css, isLoadComponent_Bootstrapselect, 'Component_Bootstrapselect_css');
         }).then(function () {
-            return LoadComponents_test(CoreSetting.Component_Bootstrapselect_js, isLoadComponent_Bootstrapselect);
+            return LoadComponents_test(CoreSetting.Component_Bootstrapselect_js, isLoadComponent_Bootstrapselect, 'Component_Bootstrapselect_js');
         }).then(function () {
-            return LoadComponents_test(CoreSetting.Component_Bootstrapselect_lang, isLoadComponent_Bootstrapselect);
+            return LoadComponents_test(CoreSetting.Component_Bootstrapselect_lang, isLoadComponent_Bootstrapselect, 'Component_Bootstrapselect_lang');
         }).then(function () {
-            console.log('Component_Bootstrapselect Load Completed.');
-            return LoadComponents_test(CoreSetting.Component_Vue_js, isLoadComponent_Vue);
+            return LoadComponents_test(CoreSetting.Component_Vue_js, isLoadComponent_Vue, 'Component_Vue_js');
         }).then(function () {
             SetVue_obj();
-            console.log('Component_Vue Load Completed.');
-            return LoadComponents_test(CoreSetting.Component_External_js, isLoadComponent_External_js);
-            console.log('Component_External_js Load Completed.');
+            return LoadComponents_test(CoreSetting.Component_External_js, isLoadComponent_External_js, 'Component_External_js');
         });
 }
 
