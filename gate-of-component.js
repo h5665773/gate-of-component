@@ -268,18 +268,19 @@ function Get_Today(Type_str) {
 
 function Set_Datepicker(Type_str) {
     //Type = yyyy-mm
-
-    if (Type_str == 'yyyy-mm') {
-        Setting.Datepicker_obj.datepicker({
-            format: Type_str,
-            startView: 1,
-            minViewMode: 1,
-            clearBtn: true,
-            language: "zh-TW",
-            orientation: "bottom left",
-            autoclose: true,
-            todayHighlight: true
-        });
+    if (Setting.Datepicker_obj != null) {
+        if (Type_str == 'yyyy-mm') {
+            Setting.Datepicker_obj.datepicker({
+                format: Type_str,
+                startView: 1,
+                minViewMode: 1,
+                clearBtn: true,
+                language: "zh-TW",
+                orientation: "bottom left",
+                autoclose: true,
+                todayHighlight: true
+            });
+        }
     }
 }
 
