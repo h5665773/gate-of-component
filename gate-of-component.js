@@ -50,7 +50,7 @@ let CoreSetting = new Object({
     }
 });
 let $goc;
-let Vue_obj;
+var Vue_obj;
 
 //Client Settings
 var isLoadComponent_Jquery = true;
