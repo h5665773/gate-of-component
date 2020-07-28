@@ -149,8 +149,10 @@ let AjaxUrl_str = 'XMLFORM/AjaxOrder.aspx';
 let InputDataGroup1_class = '.inputdata-1';
 let InputData1_objs;
 
-//ex:
-//Before 'Load Components' 
+////ex:
+////Before 'Load_Components()' to do.
+////All components 'Enable' attributes default is 'true',if don't need just 'false' it.
+
 //Component_Jquery.Enable = true;
 //Component_Bootstrap.Enable = true;
 //Component_Datepicker.Enable = true;
@@ -158,9 +160,13 @@ let InputData1_objs;
 //Component_Vue.Enable = true;
 //Component_Vue.Component_External = true;
 //Set_External_js_path('scriptself/PA1601');
+
 //Load_Components();
 
+////After 'Load_Components()' to do.
+
 //Set_MessageSetPoint_obj($j('#AlertScript'));
+
 
 function Set_MessageSetPoint_obj(Target_obj) {
     Setting.MessageSetPoint_obj = Target_obj;
