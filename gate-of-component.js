@@ -154,6 +154,7 @@ let InputDataGroup1_class = '.inputdata-1';
 let InputData1_objs;
 //ex:
 //MessageArea_obj = $j('#AlertScript');
+//Set_External_js_path('scriptself/PA1601');
 //LoadComponents();
 
 function Set_External_js_path(Path_str) {
