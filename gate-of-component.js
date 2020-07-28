@@ -1,5 +1,5 @@
-﻿let $goc = null;
-let Vue_obj = null;
+﻿var $goc = null;
+var Vue_obj = null;
 let Component_Jquery = new Object({
     Enable: true,
     js: document.createElement('script'),
@@ -68,7 +68,7 @@ let Component_Vue = new Object({
 let Component_External = new Object({
     Enable: true,
     js: document.createElement('script'),
-    js_name: 'Component_Vue_js',
+    js_name: 'Component_External_js',
     js_path:'Your_External_js_Path',
     Set_SourceSetting: function () {
         Component_External.js.setAttribute('type', 'text/javascript');
@@ -145,7 +145,6 @@ let Setting = new Object({
     }
 });
 
-//Client Settings
 let MessageArea_obj;
 let Selectpicker_obj;
 let Datepicker_obj;
