@@ -1,5 +1,5 @@
-﻿var $goc = null;
-var Vue_obj = null;
+﻿let $goc = null;
+let Vue_obj = null;
 let Component_Jquery = new Object({
     Enable: true,
     js: document.createElement('script'),
@@ -101,47 +101,45 @@ let Setting = new Object({
         });
     },
     Set_Vue_obj: function () {
-        if (Vue_obj != null) {
-            document.getElementById('Vue').style.display = 'none';
-            Vue_obj = new Vue({
-                el: '#Vue',
-                data: {
-                    ComList: {},
-                    CuList_Source: {},
-                    CuList: {},
-                    DaysByMonth: {},
-                    SentinelList: {},
-                    SentinelMember: {},
-                    MemberSchedule: {},
-                    MemberScheduleDetail_Source: {},
-                    MemberScheduleDetail: {}
-                },
-                updated() {
-                    this.$nextTick(function () {
-                        if (Selectpicker_obj != undefined) {
-                            Selectpicker_obj.selectpicker('refresh');
-                        }
-                    });
-                },
-                methods: {
-                    Cu_Filter: function (F_COM_ID_str) {
-                        Vue_obj.CuList = Vue_obj.CuList_Source.filter(data => { return data.F_COM_ID.match(F_COM_ID_str); });
-                    },
-                    QuerySchedule: function (F_CU_ID_str, F_YM_str) {
-                        ClearMessage();
-                        if (InputCheck() == false) {
-                            return;
-                        }
-                        Set_LastDayOfMonth(F_YM_str);
-                        Get_SentinelSchedule(F_CU_ID_str, F_YM_str, Vue_obj.DaysByMonth.length);
-                    },
-                    Show_Modal: function (F_CLASS_str, F_DAY_str, F_POINT_NAME_str, F_EMP_ID_str, F_EMP_NAME_str, ModalLabel_obj, F_CLASS_obj, F_DATE_obj, F_DATE_str) {
-                        Show_Modal(F_CLASS_str, F_DAY_str, F_POINT_NAME_str, F_EMP_ID_str, F_EMP_NAME_str, ModalLabel_obj, F_CLASS_obj, F_DATE_obj, F_DATE_str);
+        document.getElementById('Vue').style.display = 'none';
+        Vue_obj = new Vue({
+            el: '#Vue',
+            data: {
+                ComList: {},
+                CuList_Source: {},
+                CuList: {},
+                DaysByMonth: {},
+                SentinelList: {},
+                SentinelMember: {},
+                MemberSchedule: {},
+                MemberScheduleDetail_Source: {},
+                MemberScheduleDetail: {}
+            },
+            updated() {
+                this.$nextTick(function () {
+                    if (Selectpicker_obj != undefined) {
+                        Selectpicker_obj.selectpicker('refresh');
                     }
+                });
+            },
+            methods: {
+                Cu_Filter: function (F_COM_ID_str) {
+                    Vue_obj.CuList = Vue_obj.CuList_Source.filter(data => { return data.F_COM_ID.match(F_COM_ID_str); });
+                },
+                QuerySchedule: function (F_CU_ID_str, F_YM_str) {
+                    ClearMessage();
+                    if (InputCheck() == false) {
+                        return;
+                    }
+                    Set_LastDayOfMonth(F_YM_str);
+                    Get_SentinelSchedule(F_CU_ID_str, F_YM_str, Vue_obj.DaysByMonth.length);
+                },
+                Show_Modal: function (F_CLASS_str, F_DAY_str, F_POINT_NAME_str, F_EMP_ID_str, F_EMP_NAME_str, ModalLabel_obj, F_CLASS_obj, F_DATE_obj, F_DATE_str) {
+                    Show_Modal(F_CLASS_str, F_DAY_str, F_POINT_NAME_str, F_EMP_ID_str, F_EMP_NAME_str, ModalLabel_obj, F_CLASS_obj, F_DATE_obj, F_DATE_str);
                 }
-            });
-            document.getElementById('Vue').style.display = '';
-        }
+            }
+        });
+        document.getElementById('Vue').style.display = '';
     }
 });
 
