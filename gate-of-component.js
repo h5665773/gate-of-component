@@ -77,7 +77,6 @@ let Component_External = new Object({
 });
 let Setting = new Object({
     Component_InstallationTarget_obj: document.getElementsByTagName('head')[0],
-    MessageSetPoint_obj: null,
     Set_Component_SourceSetting: function () {
         Component_Jquery.Set_SourceSetting();
         Component_Bootstrap.Set_SourceSetting();
@@ -129,7 +128,7 @@ let Setting = new Object({
                 },
                 QuerySchedule: function (F_CU_ID_str, F_YM_str) {
                     Clear_Message();
-                    if (InputCheck() == false) {
+                    if (!InputCheck()) {
                         return;
                     }
                     Set_LastDayOfMonth(F_YM_str);
@@ -141,18 +140,18 @@ let Setting = new Object({
             }
         });
         document.getElementById('Vue').style.display = '';
-    }
+    },
+    Ajax_url: 'Your_Ajax_url',
+    InputCheck_class: '.Your_InputCheck_class',
+    MessageSetPoint_obj: null,
+    Selectpicker_obj: null,
+    Datepicker_obj: null
 });
-let Selectpicker_obj;
-let Datepicker_obj;
-let AjaxUrl_str = 'XMLFORM/AjaxOrder.aspx';
-let InputDataGroup1_class = '.inputdata-1';
-let InputData1_objs;
 
-////ex:
 ////Before 'Load_Components()' to do.
 ////All components 'Enable' attributes default is 'true',if don't need just 'false' it.
 
+////ex:
 //Component_Jquery.Enable = true;
 //Component_Bootstrap.Enable = true;
 //Component_Datepicker.Enable = true;
@@ -160,13 +159,31 @@ let InputData1_objs;
 //Component_Vue.Enable = true;
 //Component_Vue.Component_External = true;
 //Set_External_js_path('scriptself/PA1601');
-
 //Load_Components();
 
 ////After 'Load_Components()' to do.
 
+//Set_Ajax_url('XMLFORM/AjaxOrder.aspx');
+//Set_InputCheck_class('.inputdata-1');
 //Set_MessageSetPoint_obj($j('#AlertScript'));
+//Set_Selectpicker_obj($j('.selectpicker'));
+//Set_Datepicker_obj($j('.datepicker_yyyy-MM'));
 
+function Set_InputCheck_class(Class_str) {
+    Setting.InputCheck_class = Class_str;
+}
+
+function Set_Ajax_url(Url_str) {
+    Setting.Ajax_url = Url_str;
+}
+
+function Set_Selectpicker_obj(Target_obj) {
+    Setting.Selectpicker_obj = Target_obj;
+}
+
+function Set_Datepicker_obj(Target_obj) {
+    Setting.Datepicker_obj = Target_obj;
+}
 
 function Set_MessageSetPoint_obj(Target_obj) {
     Setting.MessageSetPoint_obj = Target_obj;
@@ -237,11 +254,23 @@ function PadLeft(Target_str, Padding_str, TotalWidth_int) {
     return Target_str;
 }
 
-function Set_Datepicker(Type_str, Target_obj) {
-    //Type = yyyy-mm / yyyy-mm-dd
+function Get_Today(Type_str) {
+    //Tpye = yyyymmdd
+    let Date_obj = new Date();
+    let Today_str = '';
+
+    if (Type_str == 'yyyymmdd') {
+        Today_str = Date_obj.getFullYear().toString() + PadLeft((Date_obj.getMonth() + 1).toString(), '0', 2) + PadLeft(Date_obj.getDate().toString(), '0', 2);
+    }
+
+    return Today_str;
+}
+
+function Set_Datepicker(Type_str) {
+    //Type = yyyy-mm
 
     if (Type_str == 'yyyy-mm') {
-        Target_obj.datepicker({
+        Setting.Datepicker_obj.datepicker({
             format: Type_str,
             startView: 1,
             minViewMode: 1,
@@ -257,7 +286,7 @@ function Set_Datepicker(Type_str, Target_obj) {
 function Set_ComData() {
     $goc.ajax({
         type: 'POST',
-        url: AjaxUrl_str,
+        url: Ajax_url,
         data: {
             Order: 'Get_ComData'
         },
@@ -271,7 +300,7 @@ function Set_ComData() {
 function Set_CuData(F_COM_ID_str) {
     $goc.ajax({
         type: 'POST',
-        url: AjaxUrl_str,
+        url: Ajax_url,
         data: {
             Order: 'Get_CuData',
             F_COM_ID: F_COM_ID_str
@@ -285,11 +314,11 @@ function Set_CuData(F_COM_ID_str) {
 }
 
 function InputCheck() {
-    InputData1_objs = $goc(`select${InputDataGroup1_class},input${InputDataGroup1_class}[type!="search"]`);
+    let InputData_objs = $goc(`select${InputCheck_class},input${InputCheck_class}[type!="search"]`);
 
-    if (InputData1_objs.length > 0) {
-        for (let i = 0; i < InputData1_objs.length; i++) {
-            let InputData_str = InputData1_objs[i].value;
+    if (InputData_objs.length > 0) {
+        for (let i = 0; i < InputData_objs.length; i++) {
+            let InputData_str = InputData_objs[i].value;
             if (InputData_str == '') {
                 Alert_Message('warning', '請輸入查詢條件！');
                 return false;
@@ -334,7 +363,7 @@ function Set_LastDayOfMonth(Date_yyyymm_str) {
 function Get_SentinelSchedule(F_CU_ID_str, F_YM_str, LastDayofMonth_str) {
     $goc.ajax({
         type: 'POST',
-        url: AjaxUrl_str,
+        url: Ajax_url,
         data: {
             Order: 'Get_SentinelSchedule',
             F_CU_ID: F_CU_ID_str,
@@ -358,16 +387,4 @@ function Show_Modal(F_CLASS_str, F_DAY_str, F_POINT_NAME_str, F_EMP_ID_str, F_EM
     F_DATE_obj.html(F_DATE_str);
     Vue_obj.MemberScheduleDetail = Vue_obj.MemberScheduleDetail_Source.filter(data => { return data.F_DAY.match(F_DAY_str); });
     Vue_obj.MemberScheduleDetail = Vue_obj.MemberScheduleDetail.filter(data => { return data.F_EMP_ID.match(F_EMP_ID_str); });
-}
-
-function Get_Today(Type_str) {
-    //Tpye = yyyymmdd
-    let Date_obj = new Date();
-    let Today_str = '';
-
-    if (Type_str == 'yyyymmdd') {
-        Today_str = Date_obj.getFullYear().toString() + PadLeft((Date_obj.getMonth() + 1).toString(), '0', 2) + PadLeft(Date_obj.getDate().toString(), '0', 2);
-    }
-
-    return Today_str;
 }
