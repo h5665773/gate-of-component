@@ -72,7 +72,7 @@ let Component_External = new Object({
     js_path:'Your_External_js_Path',
     Set_SourceSetting: function () {
         Component_External.js.setAttribute('type', 'text/javascript');
-        Component_External.js.setAttribute('src', `${Component_External.js_path}.js?Update=${Get_Today()}`);
+        Component_External.js.setAttribute('src', `${Component_External.js_path}.js?Update=${Get_Today('yyyymmdd')}`);
     }
 });
 let Setting = new Object({
@@ -342,9 +342,14 @@ function Show_Modal(F_CLASS_str, F_DAY_str, F_POINT_NAME_str, F_EMP_ID_str, F_EM
     Vue_obj.MemberScheduleDetail = Vue_obj.MemberScheduleDetail.filter(data => { return data.F_EMP_ID.match(F_EMP_ID_str); });
 }
 
-function Get_Today() {
-    //yyyymmdd
+function Get_Today(Type_str) {
+    //Tpye = yyyymmdd
     let Date_obj = new Date();
-    let Today_str = Date_obj.getFullYear().toString() + PadLeft((Date_obj.getMonth() + 1).toString(), '0', 2) + PadLeft(Date_obj.getDate().toString(), '0', 2);
+    let Today_str = '';
+
+    if (Type_str == 'yyyymmdd') {
+        Today_str = Date_obj.getFullYear().toString() + PadLeft((Date_obj.getMonth() + 1).toString(), '0', 2) + PadLeft(Date_obj.getDate().toString(), '0', 2);
+    }
+
     return Today_str;
 }
