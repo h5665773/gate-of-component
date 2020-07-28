@@ -117,8 +117,8 @@ let Setting = new Object({
             },
             updated() {
                 this.$nextTick(function () {
-                    if (Selectpicker_obj != undefined) {
-                        Selectpicker_obj.selectpicker('refresh');
+                    if (Setting.Selectpicker_obj != null) {
+                        Setting.Selectpicker_obj.selectpicker('refresh');
                     }
                 });
             },
