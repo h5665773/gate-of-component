@@ -286,7 +286,7 @@ function Set_Datepicker(Type_str) {
 function Set_ComData() {
     $goc.ajax({
         type: 'POST',
-        url: Ajax_url,
+        url: Setting.Ajax_url,
         data: {
             Order: 'Get_ComData'
         },
@@ -300,7 +300,7 @@ function Set_ComData() {
 function Set_CuData(F_COM_ID_str) {
     $goc.ajax({
         type: 'POST',
-        url: Ajax_url,
+        url: Setting.Ajax_url,
         data: {
             Order: 'Get_CuData',
             F_COM_ID: F_COM_ID_str
@@ -363,7 +363,7 @@ function Set_LastDayOfMonth(Date_yyyymm_str) {
 function Get_SentinelSchedule(F_CU_ID_str, F_YM_str, LastDayofMonth_str) {
     $goc.ajax({
         type: 'POST',
-        url: Ajax_url,
+        url: Setting.Ajax_url,
         data: {
             Order: 'Get_SentinelSchedule',
             F_CU_ID: F_CU_ID_str,
