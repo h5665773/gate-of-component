@@ -77,6 +77,7 @@ let Component_External = new Object({
 });
 let Setting = new Object({
     Component_InstallationTarget_obj: document.getElementsByTagName('head')[0],
+    MessageSetPoint_obj: null,
     Set_Component_SourceSetting: function () {
         Component_Jquery.Set_SourceSetting();
         Component_Bootstrap.Set_SourceSetting();
@@ -85,7 +86,7 @@ let Setting = new Object({
         Component_Vue.Set_SourceSetting();
         Component_External.Set_SourceSetting();
     },
-    LoadComponent: function (Component_obj, Component_Enable, ComponentName_str) {
+    Load_Component: function (Component_obj, Component_Enable, ComponentName_str) {
         return new Promise(function (resolve, reject) {
             if (Component_Enable) {
                 Setting.Component_InstallationTarget_obj.appendChild(Component_obj);
@@ -127,7 +128,7 @@ let Setting = new Object({
                     Vue_obj.CuList = Vue_obj.CuList_Source.filter(data => { return data.F_COM_ID.match(F_COM_ID_str); });
                 },
                 QuerySchedule: function (F_CU_ID_str, F_YM_str) {
-                    ClearMessage();
+                    Clear_Message();
                     if (InputCheck() == false) {
                         return;
                     }
@@ -142,55 +143,66 @@ let Setting = new Object({
         document.getElementById('Vue').style.display = '';
     }
 });
-
-let MessageArea_obj;
 let Selectpicker_obj;
 let Datepicker_obj;
 let AjaxUrl_str = 'XMLFORM/AjaxOrder.aspx';
 let InputDataGroup1_class = '.inputdata-1';
 let InputData1_objs;
+
 //ex:
-//MessageArea_obj = $j('#AlertScript');
+//Before 'Load Components' 
+//Component_Jquery.Enable = true;
+//Component_Bootstrap.Enable = true;
+//Component_Datepicker.Enable = true;
+//Component_Bootstrapselect.Enable = true;
+//Component_Vue.Enable = true;
+//Component_Vue.Component_External = true;
 //Set_External_js_path('scriptself/PA1601');
-//LoadComponents();
+//Load_Components();
+
+//Set_MessageSetPoint_obj($j('#AlertScript'));
+
+function Set_MessageSetPoint_obj(Target_obj) {
+    Setting.MessageSetPoint_obj = Target_obj;
+}
 
 function Set_External_js_path(Path_str) {
     Component_External.js_path = Path_str;
 }
 
-function LoadComponents() {
+function Load_Components() {
     Setting.Set_Component_SourceSetting();
-    Setting.LoadComponent(Component_Jquery.js, Component_Jquery.Enable, Component_Jquery.js_name)
+    Setting.Load_Component(Component_Jquery.js, Component_Jquery.Enable, Component_Jquery.js_name)
         .then(function (msg) {
             if (msg == 'success') {
                 $goc = jQuery.noConflict(true);
             }
-            return Setting.LoadComponent(Component_Bootstrap.css, Component_Bootstrap.Enable, Component_Bootstrap.css_name);
+            return Setting.Load_Component(Component_Bootstrap.css, Component_Bootstrap.Enable, Component_Bootstrap.css_name);
         }).then(function (msg) {
-            return Setting.LoadComponent(Component_Bootstrap.js, Component_Bootstrap.Enable,Component_Bootstrap.js_name);
+            return Setting.Load_Component(Component_Bootstrap.js, Component_Bootstrap.Enable,Component_Bootstrap.js_name);
         }).then(function (msg) {
-            return Setting.LoadComponent(Component_Datepicker.css, Component_Datepicker.Enable,Component_Datepicker.css_name);
+            return Setting.Load_Component(Component_Datepicker.css, Component_Datepicker.Enable,Component_Datepicker.css_name);
         }).then(function (msg) {                             
-            return Setting.LoadComponent(Component_Datepicker.js, Component_Datepicker.Enable, Component_Datepicker.js_name);
+            return Setting.Load_Component(Component_Datepicker.js, Component_Datepicker.Enable, Component_Datepicker.js_name);
         }).then(function (msg) {                             
-            return Setting.LoadComponent(Component_Datepicker.lang, Component_Datepicker.Enable, Component_Datepicker.lang_name);
+            return Setting.Load_Component(Component_Datepicker.lang, Component_Datepicker.Enable, Component_Datepicker.lang_name);
         }).then(function (msg) {
-            return Setting.LoadComponent(Component_Bootstrapselect.css, Component_Bootstrapselect.Enable, Component_Bootstrapselect.css_name);
+            return Setting.Load_Component(Component_Bootstrapselect.css, Component_Bootstrapselect.Enable, Component_Bootstrapselect.css_name);
         }).then(function (msg) {
-            return Setting.LoadComponent(Component_Bootstrapselect.js, Component_Bootstrapselect.Enable, Component_Bootstrapselect.js_name);
+            return Setting.Load_Component(Component_Bootstrapselect.js, Component_Bootstrapselect.Enable, Component_Bootstrapselect.js_name);
         }).then(function (msg) {
-            return Setting.LoadComponent(Component_Bootstrapselect.lang, Component_Bootstrapselect.Enable, Component_Bootstrapselect.lang_name);
+            return Setting.Load_Component(Component_Bootstrapselect.lang, Component_Bootstrapselect.Enable, Component_Bootstrapselect.lang_name);
         }).then(function (msg) {
-            return Setting.LoadComponent(Component_Vue.js, Component_Vue.Enable, Component_Vue.js_name);
+            return Setting.Load_Component(Component_Vue.js, Component_Vue.Enable, Component_Vue.js_name);
         }).then(function (msg) {
             if (msg == 'success') {
                 Setting.Set_Vue_obj();
             }
-            return Setting.LoadComponent(Component_External.js, Component_External.Enable, Component_External.js_name);
+            return Setting.Load_Component(Component_External.js, Component_External.Enable, Component_External.js_name);
         });
 }
 
-function AlertMessage(Type_str, Massage_str) {
+function Alert_Message(Type_str, Massage_str) {
     //Type = primary / secondary / success / danger / warning / info / light / dark
 
     let AlertMessage_obj =
@@ -199,16 +211,16 @@ function AlertMessage(Type_str, Massage_str) {
         `<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>` +
         `</div>`;
 
-    if (MessageArea_obj != undefined) {
-        MessageArea_obj.html(AlertMessage_obj);
+    if (Setting.MessageSetPoint_obj != undefined) {
+        Setting.MessageSetPoint_obj.html(AlertMessage_obj);
     }
     else {
         alert(Massage_str);
     }
 }
 
-function ClearMessage() {
-    MessageArea_obj.html('');
+function Clear_Message() {
+    Setting.MessageSetPoint_obj.html('');
 }
 
 function PadLeft(Target_str, Padding_str, TotalWidth_int) {
@@ -273,7 +285,7 @@ function InputCheck() {
         for (let i = 0; i < InputData1_objs.length; i++) {
             let InputData_str = InputData1_objs[i].value;
             if (InputData_str == '') {
-                AlertMessage('warning', '請輸入查詢條件！');
+                Alert_Message('warning', '請輸入查詢條件！');
                 return false;
             }
         }
