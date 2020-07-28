@@ -49,7 +49,7 @@ let CoreSetting = new Object({
         return Today_str;
     }
 });
-let $goc;
+var $goc;
 var Vue_obj;
 
 //Client Settings
