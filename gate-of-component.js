@@ -19,7 +19,7 @@ let CoreSetting = new Object({
     Component_External_js: document.createElement('script'),
     Component_External_js_Path: '',
     Component_InstallationTarget_obj: document.getElementsByTagName('head')[0],
-    Component_SourceSetting: function () {
+    Set_Component_SourceSetting: function () {
         CoreSetting.Component_Jquery_js.setAttribute('type', 'text/javascript');
         CoreSetting.Component_Jquery_js.setAttribute('src', 'https://h5665773.github.io/jquery-3.5.1-dist/jquery-3.5.1.min.js');
         CoreSetting.Component_Bootstrap_css.setAttribute('rel', 'stylesheet');
@@ -41,9 +41,9 @@ let CoreSetting = new Object({
         CoreSetting.Component_Vue_js.setAttribute('type', 'text/javascript');
         CoreSetting.Component_Vue_js.setAttribute('src', 'https://h5665773.github.io/Vue-2.6.11-dist/vue.min.js');
         CoreSetting.Component_External_js.setAttribute('type', 'text/javascript');
-        CoreSetting.Component_External_js.setAttribute('src', `${CoreSetting.Component_External_js_Path}.js?Update=${CoreSetting.GetToday()}`);
+        CoreSetting.Component_External_js.setAttribute('src', `${CoreSetting.Component_External_js_Path}.js?Update=${CoreSetting.Get_Today()}`);
     },
-    GetToday: function () {
+    Get_Today: function () {
         let Date_obj = new Date();
         let Today_str = Date_obj.getFullYear().toString() + PadLeft((Date_obj.getMonth() + 1).toString(), '0', 2) + PadLeft(Date_obj.getDate().toString(), '0', 2);
         return Today_str;
@@ -87,7 +87,7 @@ function LoadComponents_test(Component_obj, isLoadComponent, ComponentName_str) 
     });
 }
 function test() {
-    CoreSetting.Component_SourceSetting();
+    CoreSetting.Set_Component_SourceSetting();
 
     LoadComponents_test(CoreSetting.Component_Jquery_js, isLoadComponent_Jquery,'Component_Jquery_js')
         .then(function (msg) {
