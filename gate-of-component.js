@@ -112,7 +112,8 @@ let Setting = new Object({
                 SentinelList: {},
                 SentinelMember: {},
                 MemberSchedule: {},
-                MemberSecSchedule: {}
+                MemberSecSchedule: {},
+                SentineSeclList: {}
             },
             updated() {
                 this.$nextTick(function () {
@@ -374,6 +375,7 @@ function Get_SentinelSchedule(F_CU_ID_str, F_YM_str, LastDayofMonth_str) {
             Vue_obj.SentinelMember = JsonData.SentinelMember;
             Vue_obj.MemberSchedule = JsonData.MemberSchedule;
             Vue_obj.MemberSecSchedule = JsonData.MemberSecSchedule;
+            Vue_obj.SentineSeclList = JsonData.SentineSeclList;
         }
     });
 }
