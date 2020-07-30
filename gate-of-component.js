@@ -133,6 +133,9 @@ let Setting = new Object({
                     }
                     Set_LastDayOfMonth(F_YM_str);
                     Get_SentinelSchedule(F_CU_ID_str, F_YM_str, Vue_obj.DaysByMonth.length);
+                },
+                QuerySecSchedule: function (F_EMP_ID_str, F_YM_str) {
+                    Get_SentinelSecSchedule(F_EMP_ID_str, F_YM_str, Vue_obj.DaysByMonth.length);
                 }
             }
         });
@@ -374,6 +377,23 @@ function Get_SentinelSchedule(F_CU_ID_str, F_YM_str, LastDayofMonth_str) {
             Vue_obj.SentinelList = JsonData.SentinelList;
             Vue_obj.SentinelMember = JsonData.SentinelMember;
             Vue_obj.MemberSchedule = JsonData.MemberSchedule;
+        }
+    });
+}
+
+function Get_SentinelSecSchedule(F_EMP_ID_str, F_YM_str, LastDayofMonth_str) {
+    $goc.ajax({
+        type: 'POST',
+        url: Setting.Ajax_url,
+        data: {
+            Order: 'Get_SentinelSecSchedule',
+            F_EMP_ID: F_EMP_ID_str,
+            F_YM: F_YM_str,
+            LastDayofMonth: LastDayofMonth_str
+        },
+        success: function (data) {
+            let JsonData = JSON.parse(data);
+
             Vue_obj.MemberSecSchedule = JsonData.MemberSecSchedule;
             Vue_obj.SentineSeclList = JsonData.SentineSeclList;
         }
